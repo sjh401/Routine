@@ -1,7 +1,8 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
-const Home = lazy(() => import('./screens/Home'));
+import Container from "./container/Container";
+// const Home = lazy(() => import('./screens/Home'));
 
 
 const App = () => (
@@ -9,7 +10,7 @@ const App = () => (
       <Router>
         <Suspense fallback={<div>...loading</div>}>
           <Routes>
-            <Route path='/' element={<Home/>}/>
+            <Route path='/' element={<Container/>}/>
           </Routes>
           </Suspense>
       </Router>
