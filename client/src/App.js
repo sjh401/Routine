@@ -7,13 +7,9 @@ import Container from "./container/Container";
 
 const App = () => (
     <Layout>
-      <Router>
-        <Suspense fallback={<div>...loading</div>}>
-          <Routes>
-            <Route path='/' element={<Container/>}/>
-          </Routes>
-          </Suspense>
-      </Router>
+          {/* <Routes> */}
+            {/* <Route path='/' element={<Container/>}/> */}
+          {/* </Routes> */}
     </Layout>
 )
 

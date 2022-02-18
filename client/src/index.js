@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './index.css';
-import App from './App';
+// import App from './App';
+
+const App = lazy(() => import('./App'))
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+      <Router>
+        <Suspense fallback={<div>...loading</div>}>
+          <Routes>
+            <Route path='/' element={<App/>}/>
+          </Routes>
+        </Suspense>
+      </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
