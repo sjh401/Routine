@@ -15,6 +15,12 @@ const Button = styled(Button)(({ theme }) => ({
 }));
 
 export default function SignUp() {
+    const handleChange = () => {
+        console.log('hello')
+    }
+    const handleRegister = () => {
+        console.log('world')
+    }
     return(
         <>
             <div>
