@@ -10,7 +10,7 @@ import Register from "./screens/Register";
 
 
 const App = () => {
-  console.log('app loads');
+  
   return (
     <Layout>
       <Routes>
