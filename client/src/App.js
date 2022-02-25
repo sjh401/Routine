@@ -1,22 +1,71 @@
-import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Container from "./container/Container";
 import Login from "./screens/Login"
 import Register from "./screens/Register";
+import { loginUser, registerUser, removeToken, verifyUser } from "./services/auth";
 
 
 
 const App = () => {
+  const [ currentUser, setCurrentUser ] = useState(null);
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const handleVerify = async () => {
+      const userData = await verifyUser();
+      setCurrentUser(userData)
+    } 
+    handleVerify();
+  },[])
 
-  const handleRegister = () => {
-    
+  const handleLogin = async (loginData) => {
+    const userData = await loginUser(loginData);
+    setCurrentUser(userData);
+    navigate('/');
+  }
+
+  const handleRegister = async (registerData) => {
+    const userData = await registerUser(registerData);
+    navigate('/');
+  }
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('authToken');
+    removeToken();
   }
   return (
-    <Layout>
+    <Layout 
+      currentUser={currentUser}
+      handleLogout={handleLogout}
+    >
       <Routes>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
-        <Route path="/*" element={<Container/>}/>
+        <Route 
+          path="/login" 
+          element={
+            <Login
+              handleLogin={handleLogin}
+            />
+          }
+        />
+        <Route 
+          path="/register" 
+          element={
+            <Register
+              handleRegister={handleRegister}
+            />
+          }
+        />
+        <Route 
+          path="/*" 
+          element={
+            <Container
+              currentUser={currentUser}
+            />
+          }
+        />
       </Routes>
     </Layout>
   )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles';
@@ -17,15 +17,18 @@ const LoginButton = styled(Button)(({ theme }) => ({
     },
 }));
 
-const Login = () => {
-    const {username, password} = {}
-    const navigate = useNavigate();
-    const handleChange = () => {
-        console.log('hello')
-    }
-    const handleRegister = () => {
-        console.log('world')
-        navigate("/home")
+const Login = ({handleLogin}) => {
+    const [ formData, setFormData ] = useState({
+        password: '',
+        username: ''
+    });
+    const {username, password} = formData;
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [name]: value
+        }))
     }
     return(
         <div style={{display:'block'}}>
@@ -37,7 +40,7 @@ const Login = () => {
                     className="login-form"
                     onSubmit={(e) => {
                     e.preventDefault()
-                    handleRegister()
+                    handleLogin(formData)
                     }}>
                     <h2 className="login-register">Login</h2>
                     <br/>
@@ -61,9 +64,7 @@ const Login = () => {
                         onChange={handleChange} />
                     <br/>
                     <div>
-                        <LoginButton 
-                            type="submit" 
-                        >
+                        <LoginButton type="submit" >
                             Submit
                         </LoginButton>
                     </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -15,14 +15,21 @@ const SignUpButton = styled(Button)(({ theme }) => ({
     },
 }));
 
-export default function Register() {
-
-    const {first_name, last_name, username, email, password} = {};
-    const handleChange = () => {
-        console.log('hello')
-    }
-    const handleRegister = () => {
-        console.log('world')
+export default function Register({handleRegister}) {
+    const [ formData, setFormData ] = useState({
+        email: '',
+        password: '',
+        first_name: '',
+        last_name: '',
+        username: ''
+    });
+    const {first_name, last_name, username, email, password} = formData;
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [name]: value
+        }))
     }
     return(
         <>
@@ -34,7 +41,7 @@ export default function Register() {
                     className="login-form"
                     onSubmit={(e) => {
                     e.preventDefault()
-                    handleRegister()
+                    handleRegister(formData)
                     }}>
                     <h2 className="login-register">Register</h2>
                     <br/>
@@ -49,7 +56,7 @@ export default function Register() {
                     <TextField 
                         required 
                         label="Last Name" 
-                        name="last)name"
+                        name="last_name"
                         variant="outlined"
                         value={last_name}
                         onChange={handleChange} />
