@@ -15,7 +15,7 @@ const SignUpButton = styled(Button)(({ theme }) => ({
     },
 }));
 
-export default function SignUp() {
+export default function Register() {
 
     const {first_name, last_name, username, email, password} = {};
     const handleChange = () => {
@@ -27,7 +27,7 @@ export default function SignUp() {
     return(
         <>
             <div>
-                Sign Up
+                Register
             </div>
             <div className="login-container">
                 <form 
@@ -40,7 +40,6 @@ export default function SignUp() {
                     <br/>
                     <TextField 
                         required 
-                        id="outlined-basic" 
                         label="First Name" 
                         name="first_name"
                         variant="outlined"
@@ -49,7 +48,6 @@ export default function SignUp() {
                     <br/>
                     <TextField 
                         required 
-                        id="outlined-basic" 
                         label="Last Name" 
                         name="last)name"
                         variant="outlined"
@@ -58,7 +56,6 @@ export default function SignUp() {
                     <br/>
                     <TextField 
                         required 
-                        id="outlined-basic" 
                         label="Username"
                         name="username"
                         variant="outlined" 
@@ -67,7 +64,6 @@ export default function SignUp() {
                     <br/>
                     <TextField 
                         required 
-                        id="outlined-basic" 
                         type="email"
                         label="Email" 
                         name="email"
@@ -77,7 +73,6 @@ export default function SignUp() {
                     <br/>
                     <TextField 
                         required 
-                        id="outlined-basic" 
                         type="password"
                         label="Password" 
                         name="password"

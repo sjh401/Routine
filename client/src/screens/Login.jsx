@@ -2,6 +2,8 @@ import React from 'react';
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const LoginButton = styled(Button)(({ theme }) => ({
     color: '#fff',
@@ -17,11 +19,13 @@ const LoginButton = styled(Button)(({ theme }) => ({
 
 const Login = () => {
     const {username, password} = {}
+    const navigate = useNavigate();
     const handleChange = () => {
         console.log('hello')
     }
     const handleRegister = () => {
         console.log('world')
+        navigate("/home")
     }
     return(
         <div style={{display:'block'}}>
@@ -57,7 +61,9 @@ const Login = () => {
                         onChange={handleChange} />
                     <br/>
                     <div>
-                        <LoginButton type="submit" >
+                        <LoginButton 
+                            type="submit" 
+                        >
                             Submit
                         </LoginButton>
                     </div>

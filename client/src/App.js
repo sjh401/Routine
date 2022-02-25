@@ -1,16 +1,28 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Container from "./container/Container";
+import Calendar from "./screens/Calendar";
+import Home from "./screens/Home";
 import Login from "./screens/Login"
+import Register from "./screens/Register";
 // const Home = lazy(() => import('./screens/Home'));
 
 
 const App = () => {
-
+  console.log('app loads');
   return (
     <Layout>
-      <div>hello</div>
+      <Routes>
+        <Route path="*" element={<Container/>}/>
+          {/* <Route path="home" element={<Home/>}/>
+          <Route path="calendar" element={<Calendar/>}/>
+        </Route> */}
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+        {/* <Route path="/home" element={<Home/>}/>
+        <Route path="/calendar" element={<Calendar/>}/> */}
+      </Routes>
     </Layout>
   )
   }
