@@ -39,7 +39,7 @@ const Login = () => {
                     <br/>
                     <TextField 
                         required 
-                        id="outlined-basic" 
+                        // id="outlined-basic" 
                         label="Username"
                         name="username"
                         variant="outlined" 
@@ -48,7 +48,7 @@ const Login = () => {
                     <br/>
                     <TextField 
                         required 
-                        id="outlined-basic" 
+                        // id="outlined-basic" 
                         type="password"
                         label="Password" 
                         name="password"
