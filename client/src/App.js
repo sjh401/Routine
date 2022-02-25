@@ -23,12 +23,13 @@ const App = () => {
   const handleLogin = async (loginData) => {
     const userData = await loginUser(loginData);
     setCurrentUser(userData);
-    navigate('/');
+    navigate('/home');
   }
 
   const handleRegister = async (registerData) => {
     const userData = await registerUser(registerData);
-    navigate('/');
+    setCurrentUser(userData);
+    navigate('/home');
   }
 
   const handleLogout = () => {

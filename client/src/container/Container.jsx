@@ -4,11 +4,18 @@ import Calendar from '../screens/Calendar';
 import Home from '../screens/Home';
 
 
-export default function Container() {
+export default function Container({currentUser}) {
     return(
         <>
             <Routes>
-                <Route path="/home" element={<Home/>}/>
+                <Route 
+                    path="/home" 
+                    element={
+                        <Home
+                            currentUser={currentUser}
+                        />
+                    }
+                />
                 <Route path="/calendar" element={<Calendar/>}/>
             </Routes>
         </>
