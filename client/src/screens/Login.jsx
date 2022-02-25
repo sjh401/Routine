@@ -1,8 +1,9 @@
 import React from 'react';
 import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles';
 
-const Button = styled(Button)(({ theme }) => ({
+const LoginButton = styled(Button)(({ theme }) => ({
     color: '#fff',
     backgroundColor: '#ff7777',
     fontFamily: 'Poppins, sans-serif',
@@ -14,7 +15,8 @@ const Button = styled(Button)(({ theme }) => ({
     },
 }));
 
-export default function SignUp() {
+const Login = () => {
+    const {username, password} = {}
     const handleChange = () => {
         console.log('hello')
     }
@@ -22,16 +24,16 @@ export default function SignUp() {
         console.log('world')
     }
     return(
-        <>
+        <div style={{display:'block'}}>
             <div>
-                Sign Up
+                Login
             </div>
             <div className="login-container">
                 <form 
                     className="login-form"
                     onSubmit={(e) => {
                     e.preventDefault()
-                    handleRegister(formData)
+                    handleRegister()
                     }}>
                     <h2 className="login-register">Login</h2>
                     <br/>
@@ -55,12 +57,13 @@ export default function SignUp() {
                         onChange={handleChange} />
                     <br/>
                     <div>
-                        <Button type="submit" >
+                        <LoginButton type="submit" >
                             Submit
-                        </Button>
+                        </LoginButton>
                     </div>
                 </form>
             </div>
-        </>
+        </div>
     )
 }
+export default Login
