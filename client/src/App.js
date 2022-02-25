@@ -14,20 +14,12 @@ const App = () => {
   return (
     <Layout>
       <Routes>
-        <Route path="*" element={<Container/>}/>
-          {/* <Route path="home" element={<Home/>}/>
-          <Route path="calendar" element={<Calendar/>}/>
-        </Route> */}
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
-        {/* <Route path="/home" element={<Home/>}/>
-        <Route path="/calendar" element={<Calendar/>}/> */}
+        <Route path="/*" element={<Container/>}/>
       </Routes>
     </Layout>
   )
   }
 
 export default App;
-
-
-//closure parameters

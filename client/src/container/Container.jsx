@@ -9,11 +9,9 @@ export default function Container() {
     console.log('container loads')
     return(
         <>
-            {/* <div>Container</div> */}
             <Routes>
-
-            <Route path="/home" element={<Home/>}/>
-        <Route path="/calendar" element={<Calendar/>}/>
+                <Route path="/home" element={<Home/>}/>
+                <Route path="/calendar" element={<Calendar/>}/>
             </Routes>
         </>
 
