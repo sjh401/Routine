@@ -6,7 +6,6 @@ import Home from '../screens/Home';
 import { Component } from 'react';
 
 export default function Container() {
-    console.log('container loads')
     return(
         <>
             <Routes>
