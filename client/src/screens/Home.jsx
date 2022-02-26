@@ -8,5 +8,9 @@ export default function Home(props) {
       Welcome!!! Home
       {currentUser?.first_name}
       <Link to='/calendar'>Calendar</Link>
+      <Link to='/add'>add</Link>
+      <Link to='/item/:id'>edit</Link>
+      <Link to='/item'>item</Link>
+      <Link to='/user'>user</Link>
   </div>;
 }
