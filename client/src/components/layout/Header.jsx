@@ -5,13 +5,12 @@ import { styled } from '@mui/material/styles';
 
 const LogoutButton = styled(Button)(({ theme }) => ({
     color: '#fff',
-    backgroundColor: '#ff7777',
+    backgroundColor: 'green',
     fontFamily: 'Poppins, sans-serif',
-    width: '60vw',
-    maxWidth: 194,
+    width: 100,
     marginTop: 10,
     '&:hover': {
-        backgroundColor: '#4fa8fc',
+        backgroundColor: 'blue',
     },
 }));
 
@@ -21,8 +20,8 @@ export default function Header(props) {
       <div>
         <Link to='/calendar'>Calendar</Link>
         <Link to='/add'>add</Link>
-        <Link to='/item/:id'>edit</Link>
-        <Link to='/item'>item</Link>
+        {/* <Link to='/item/:id'>edit</Link>
+        <Link to='/item'>item</Link> */}
         <Link to='/user'>user</Link>
         <LogoutButton onClick={props.handleLogout}>Logout</LogoutButton>
       </div>

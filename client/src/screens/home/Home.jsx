@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css'
 
 export default function Home(props) {
   const { currentUser, allItems } = props;
-  const [ userItems, setUserItems ] = useState([])
   console.log(allItems)
   console.log(currentUser)
-
-  useEffect(() => {
-    const items = allItems.filter(element => element.user_id === currentUser?.id)
-    setUserItems(items)
-  },[allItems])
 
   return (
   <React.Fragment>
@@ -21,19 +16,21 @@ export default function Home(props) {
         {currentUser?.first_name}
       </div>
       <div className='flex-row-wrap'>
-        {userItems?.map(item => {
+        {allItems?.map(item => {
           return (
             <div 
-              key={`${item.id} ${item.title}`}
-              className='flex-column'
-            >
-              <h4>
-                {item.title}
-              </h4>
-              <div>
-                {item.completed === true ? 'complete' : 'not'}
+                key={`${item.id} ${item.title}`}
+                className='flex-column'
+              >
+            <Link to={`/item/${item.id}`}>
+                <h4>
+                  {item.title}
+                </h4>
+            </Link>
+                <div>
+                  {item.completed === true ? 'complete' : 'not'}
+                </div>
               </div>
-            </div>
           )
         })}
       </div>

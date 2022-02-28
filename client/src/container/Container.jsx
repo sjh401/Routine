@@ -15,10 +15,10 @@ export default function Container({currentUser}) {
     useEffect(() => {
         const fetchItems = async () => {
             const items = await getAllItems();
-            setAllItems(items)
+            setAllItems(items.filter(element => element.user_id === currentUser?.id));
         }
         fetchItems();
-    }, []);
+    }, [currentUser]);
 
 
     return(
@@ -48,9 +48,10 @@ export default function Container({currentUser}) {
                     }
                 />
                 <Route 
-                    path="/item" 
+                    path="/item/:id" 
                     element={
                         <ItemDetail
+                            allItems={allItems}
                         />
                     }
                 />
