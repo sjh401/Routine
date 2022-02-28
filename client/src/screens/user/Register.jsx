@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
-const SignUpButton = styled(Button)(({ theme }) => ({
+const RegisterButton = styled(Button)(({ theme }) => ({
     color: '#fff',
     backgroundColor: '#ff7777',
     fontFamily: 'Poppins, sans-serif',
@@ -88,9 +88,9 @@ export default function Register({handleRegister}) {
                         onChange={handleChange} />
                     <br/>
                     <div>
-                        <SignUpButton type="submit" >
+                        <RegisterButton type="submit" >
                             Submit
-                        </SignUpButton>
+                        </RegisterButton>
                     </div>
                 </form>
             </div>

@@ -35,7 +35,6 @@ const App = () => {
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem('authToken');
-    removeToken();
   }
   return (
     <Layout 
