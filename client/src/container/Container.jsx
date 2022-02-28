@@ -9,9 +9,18 @@ import User from '../screens/user/User';
 import { deleteItem, getAllItems, getItem, postItem, putItem } from '../services/items';
 
 
-export default function Container({currentUser}) {
+export default function Container(props) {
     const [ allItems, setAllItems ] = useState([])
+    const { currentUser } = props;
+    const [ formData, setFormData ] = useState({
+        description: '',
+        notes: '',
+        title: '',
+        completed: false,
+        user_id: currentUser?.id
+    });
 
+    console.log(formData)
     useEffect(() => {
         const fetchItems = async () => {
             const items = await getAllItems();
@@ -19,6 +28,14 @@ export default function Container({currentUser}) {
         }
         fetchItems();
     }, [currentUser]);
+    
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [name]: value
+        }))
+    }
 
 
     return(
@@ -44,6 +61,10 @@ export default function Container({currentUser}) {
                     path="/add" 
                     element={
                         <ItemAdd
+                            postItem={postItem}
+                            currentUser={currentUser}
+                            handleChange={handleChange}
+                            formData={formData}
                         />
                     }
                 />
