@@ -10,7 +10,7 @@ import { deleteItem, getAllItems, getItem, postItem, putItem } from '../services
 
 
 export default function Container({currentUser}) {
-    const [ allItems, setAllItems ] = useState({})
+    const [ allItems, setAllItems ] = useState([])
 
     useEffect(() => {
         const fetchItems = async () => {

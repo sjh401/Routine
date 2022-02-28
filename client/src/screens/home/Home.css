@@ -1,4 +1,6 @@
 .flex-row-wrap {
     display: flex;
     flex-flow: row wrap;
+    align-content: center;
+    justify-content: space-around;
 }
