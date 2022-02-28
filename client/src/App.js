@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Container from "./container/Container";
-import Login from "./screens/Login"
-import Register from "./screens/Register";
+import Login from "./screens/user/Login"
+import Register from "./screens/user/Register";
 import { loginUser, registerUser, removeToken, verifyUser } from "./services/auth";
 
 

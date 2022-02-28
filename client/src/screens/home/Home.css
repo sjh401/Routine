@@ -1,0 +1,12 @@
+.flex-row-wrap {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.flex-column{
+    display: flex;
+    flex-flow: column wrap;
+    text-align: center;
+}
