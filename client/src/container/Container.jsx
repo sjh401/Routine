@@ -10,7 +10,7 @@ import { deleteItem, getAllItems, getItem, postItem, putItem } from '../services
 
 
 export default function Container(props) {
-    const [ allItems, setAllItems ] = useState([])
+    const [ allItems, setAllItems ] = useState([]);
     const { currentUser } = props;
 
     useEffect(() => {
