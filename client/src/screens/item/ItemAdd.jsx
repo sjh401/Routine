@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ItemAddEdit from '../../components/ItemAddEdit';
 
 export default function ItemAdd(props) {
-  const { postItem, currentUser, handleChange, formData } = props;
+  const { postItem } = props;
 
-  // console.log(formData)
+  const [ formData, setFormData ] = useState({
+    description: '',
+    notes: '',
+    title: '',
+    completed: false,
+});
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value
+  }))
+}
+console.log(formData)
   return (
     <div>
       <Link to='/home'>Home</Link>
@@ -13,8 +26,8 @@ export default function ItemAdd(props) {
         <h2 className="">create an item</h2>
         <ItemAddEdit 
           addEditFunction={postItem}
-          handleChange={handleChange}
           formData={formData}
+          handleChange={handleChange}
         />
       </div>
     </div>

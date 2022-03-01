@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
+import { Button, TextField, styled } from '@mui/material';
 
 const RegisterButton = styled(Button)(({ theme }) => ({
     color: '#fff',

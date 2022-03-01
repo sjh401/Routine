@@ -12,15 +12,7 @@ import { deleteItem, getAllItems, getItem, postItem, putItem } from '../services
 export default function Container(props) {
     const [ allItems, setAllItems ] = useState([])
     const { currentUser } = props;
-    const [ formData, setFormData ] = useState({
-        description: '',
-        notes: '',
-        title: '',
-        completed: false,
-        user_id: currentUser?.id
-    });
 
-    console.log(formData)
     useEffect(() => {
         const fetchItems = async () => {
             const items = await getAllItems();
@@ -29,13 +21,6 @@ export default function Container(props) {
         fetchItems();
     }, [currentUser]);
     
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            [name]: value
-        }))
-    }
 
 
     return(
@@ -58,13 +43,22 @@ export default function Container(props) {
                     }
                 />
                 <Route 
-                    path="/add" 
+                    path="/item/add" 
                     element={
                         <ItemAdd
                             postItem={postItem}
                             currentUser={currentUser}
-                            handleChange={handleChange}
-                            formData={formData}
+                        />
+                    }
+                />
+                <Route 
+                    path="/item/edit/:id" 
+                    element={
+                        <ItemEdit
+                            allItems={allItems}
+                            putItem={putItem}
+                            deleteItem={deleteItem}
+                            currentUser={currentUser}
                         />
                     }
                 />
@@ -77,16 +71,10 @@ export default function Container(props) {
                     }
                 />
                 <Route 
-                    path="/item/:id" 
-                    element={
-                        <ItemEdit
-                        />
-                    }
-                />
-                <Route 
                     path="/user" 
                     element={
                         <User
+                            currentUser={currentUser}
                         />
                     }
                 />
