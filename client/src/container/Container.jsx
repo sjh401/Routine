@@ -9,8 +9,9 @@ import User from '../screens/user/User';
 import { deleteItem, getAllItems, getItem, postItem, putItem } from '../services/items';
 
 
-export default function Container({currentUser}) {
+export default function Container(props) {
     const [ allItems, setAllItems ] = useState([])
+    const { currentUser } = props;
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -19,6 +20,7 @@ export default function Container({currentUser}) {
         }
         fetchItems();
     }, [currentUser]);
+    
 
 
     return(
@@ -41,9 +43,22 @@ export default function Container({currentUser}) {
                     }
                 />
                 <Route 
-                    path="/add" 
+                    path="/item/add" 
                     element={
                         <ItemAdd
+                            postItem={postItem}
+                            currentUser={currentUser}
+                        />
+                    }
+                />
+                <Route 
+                    path="/item/edit/:id" 
+                    element={
+                        <ItemEdit
+                            allItems={allItems}
+                            putItem={putItem}
+                            deleteItem={deleteItem}
+                            currentUser={currentUser}
                         />
                     }
                 />
@@ -56,16 +71,10 @@ export default function Container({currentUser}) {
                     }
                 />
                 <Route 
-                    path="/item/:id" 
-                    element={
-                        <ItemEdit
-                        />
-                    }
-                />
-                <Route 
                     path="/user" 
                     element={
                         <User
+                            currentUser={currentUser}
                         />
                     }
                 />

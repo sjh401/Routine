@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
+import { styled, Button } from '@mui/material';
 
 const LogoutButton = styled(Button)(({ theme }) => ({
     color: '#fff',
@@ -19,7 +18,7 @@ export default function Header(props) {
     <header>
       <div>
         <Link to='/calendar'>Calendar</Link>
-        <Link to='/add'>add</Link>
+        <Link to='/item/add'>add</Link>
         {/* <Link to='/item/:id'>edit</Link>
         <Link to='/item'>item</Link> */}
         <Link to='/user'>user</Link>

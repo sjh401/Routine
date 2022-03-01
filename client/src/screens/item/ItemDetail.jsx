@@ -17,12 +17,15 @@ export default function ItemDetail(props) {
         <Link to='/home'>Home</Link>    
       </div>
       <div>
-              <h4>
-                {item[0]?.title}
-              </h4>
-              <div>
-                {item[0]?.completed === true ? 'complete' : 'not'}
-              </div>
+        <h4>
+          {item[0]?.title}
+        </h4>
+        <div>
+          {item[0]?.completed === true ? 'complete' : 'not'}
+        </div>
+        <Link to={`/item/edit/${item[0]?.id}`}>
+          Edit
+        </Link>
       </div>
     </React.Fragment>
   ) 
