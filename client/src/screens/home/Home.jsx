@@ -4,8 +4,11 @@ import './Home.css'
 
 export default function Home(props) {
   const { currentUser, allItems } = props;
-  console.log(allItems)
-  console.log(currentUser)
+  const [ items, setItems ] = useState([])
+
+  useEffect(() => {
+    setItems(allItems)
+  },[allItems])
 
   return (
   <React.Fragment>
@@ -16,7 +19,7 @@ export default function Home(props) {
         {currentUser?.first_name}
       </div>
       <div className='flex-row-wrap'>
-        {allItems?.map(item => {
+        {items?.map(item => {
           return (
             <div 
                 key={`${item.id} ${item.title}`}
