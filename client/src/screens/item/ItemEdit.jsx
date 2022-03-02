@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import ItemAddEdit from '../../components/ItemAddEdit';
 
 export default function ItemEdit(props) {
-  const { putItem, allItems, deleteItem, setToggle, setTempItem, currentUser } = props;
+  const { putItem, allItems, deleteItem, setToggle, setTempItem, currentUser, tempItem } = props;
   const item_id = useParams();
   const navigate = useNavigate();
 
@@ -29,9 +29,22 @@ const handleChange = (e) => {
       notes: singleItem[0].notes ,
       title: singleItem[0].title ,
       completed: singleItem[0].completed,
-      id: item_id.id
+      id: Number(item_id.id)
   });
-  }, [allItems])
+  setTempItem({
+    description: singleItem[0].description ,
+    notes: singleItem[0].notes ,
+    title: singleItem[0].title ,
+    completed: singleItem[0].completed,
+    id: Number(item_id.id),
+    user_id: currentUser?.id,
+    created_at: Date.now(),
+    updated: Date.now()
+})
+  }, [])
+console.log(allItems)
+  console.log('formData')
+console.log(tempItem)
 
   return (
     <div>

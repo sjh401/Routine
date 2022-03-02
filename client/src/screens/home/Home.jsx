@@ -7,8 +7,12 @@ export default function Home(props) {
   const [ items, setItems ] = useState([])
 
   useEffect(() => {
+    console.log('home useEffect')
+    console.log(toggle)
+    console.log(allItems)
+    console.log(tempItem)
     if(toggle === 'DELETE'){
-      setItems(allItems.filter(item => item !== tempItem.id))
+      setItems(allItems.filter(item => item.id !== Number(tempItem.id)))
       setToggle(prevToggle => prevToggle ='')
     } else if(toggle === 'POST'){
       allItems.push(tempItem)
@@ -16,7 +20,7 @@ export default function Home(props) {
       setToggle(prevToggle => prevToggle ='')
     } else if(toggle === 'PUT'){
       setItems(allItems.map(item => {
-        if(item.id === tempItem.id){
+        if(item.id === Number(tempItem.id)){
           return tempItem
         } else {
           return item

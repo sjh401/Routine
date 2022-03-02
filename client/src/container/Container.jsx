@@ -96,6 +96,7 @@ export default function Container(props) {
                             currentUser={currentUser}
                             setToggle={setToggle}
                             setTempItem={setTempItem}
+                            tempItem={tempItem}
                         />
                     }
                 />
