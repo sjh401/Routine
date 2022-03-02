@@ -16,7 +16,7 @@ export default function Container(props) {
     useEffect(() => {
         const fetchItems = async () => {
             const items = await getAllItems();
-            setAllItems(items.filter(element => element.user_id === currentUser?.id));
+            setAllItems(items?.filter(element => element.user_id === currentUser?.id));
         }
         fetchItems();
     }, [currentUser]);
