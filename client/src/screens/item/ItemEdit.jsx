@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import ItemAddEdit from '../../components/ItemAddEdit';
 
 export default function ItemEdit(props) {
-  const { putItem, allItems, deleteItem } = props;
+  const { putItem, allItems, deleteItem, setToggle, setTempItem, currentUser } = props;
   const item_id = useParams();
   const navigate = useNavigate();
 
@@ -42,11 +42,16 @@ const handleChange = (e) => {
           addEditFunction={putItem}
           handleChange={handleChange}
           formData={formData}
+          setToggle={setToggle}
+          setTempItem={setTempItem}
+          currentUser={currentUser}
+          toggleSet={'PUT'}
         />
       </div>
       <button onClick={() => {
         deleteItem(item_id.id)
         navigate('/home')
+        setToggle(prevToggle => prevToggle = 'DELETE')
         }}>
           Delete
       </button>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
 import { Checkbox, FormControlLabel, Button, TextField, styled } from '@mui/material';
 
 const LoginButton = styled(Button)(({ theme }) => ({
@@ -14,7 +15,9 @@ const LoginButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function ItemAddEdit(props) {
-    const { addEditFunction, formData, handleChange } = props;
+    const { addEditFunction, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet } = props;
+    const navigate = useNavigate()
+
     return (
         <div className="">
             <form 
@@ -22,6 +25,15 @@ export default function ItemAddEdit(props) {
                 onSubmit={(e) => {
                 e.preventDefault()
                 addEditFunction(formData)
+                setToggle(prevToggle => prevToggle = toggleSet)
+                setTempItem({
+                    ...formData,
+                    id: 0,
+                    user_id: currentUser?.id,
+                    created_at: Date.now(),
+                    updated: Date.now()
+                })
+                navigate('/home')
                 }}>
                 <br/>
                 <TextField 

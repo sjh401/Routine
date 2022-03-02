@@ -10,9 +10,19 @@ import { deleteItem, getAllItems, getUserItems, postItem, putItem } from '../ser
 
 
 export default function Container(props) {
-    const [ allItems, setAllItems ] = useState([]);
-    const [ toggle, setToggle ] = useState(false)
     const { currentUser } = props;
+    const [ allItems, setAllItems ] = useState([]);
+    const [ toggle, setToggle ] = useState('');
+    const [ tempItem, setTempItem ] = useState({
+        description: '',
+        notes:'',
+        title:'',
+        completed: '',
+        id: 0,
+        user_id: currentUser?.id,
+        created_at: Date.now(),
+        updated: Date.now()
+    })
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -23,10 +33,10 @@ export default function Container(props) {
             const userItems = await getUserItems();
             console.log(userItems)
         }
+        console.log('api call')
         fetchUserItems();
         fetchItems();
-    }, [currentUser, toggle]);
-
+    }, [currentUser]);
 
     return(
         <>
@@ -51,6 +61,9 @@ export default function Container(props) {
                         <Home
                             currentUser={currentUser}
                             allItems={allItems}
+                            toggle={toggle}
+                            tempItem={tempItem}
+                            setToggle={setToggle}
                         />
                     }
                 />
@@ -68,6 +81,8 @@ export default function Container(props) {
                         <ItemAdd
                             postItem={postItem}
                             currentUser={currentUser}
+                            setToggle={setToggle}
+                            setTempItem={setTempItem}
                         />
                     }
                 />
@@ -79,6 +94,8 @@ export default function Container(props) {
                             putItem={putItem}
                             deleteItem={deleteItem}
                             currentUser={currentUser}
+                            setToggle={setToggle}
+                            setTempItem={setTempItem}
                         />
                     }
                 />
