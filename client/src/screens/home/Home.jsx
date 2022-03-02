@@ -7,10 +7,6 @@ export default function Home(props) {
   const [ items, setItems ] = useState([])
 
   useEffect(() => {
-    console.log('home useEffect')
-    console.log(toggle)
-    console.log(allItems)
-    console.log(tempItem)
     if(toggle === 'DELETE'){
       setItems(allItems.filter(item => item.id !== Number(tempItem.id)))
       setToggle(prevToggle => prevToggle ='')
