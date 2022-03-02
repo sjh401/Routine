@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import ItemAddEdit from '../../components/ItemAddEdit';
 
 export default function ItemAdd(props) {
-  const { postItem } = props;
-
+  const { postItem, setToggle, setTempItem, currentUser } = props;
   const [ formData, setFormData ] = useState({
     description: '',
     notes: '',
     title: '',
     completed: false,
 });
+// const toggleSet = 'ADD'
 const handleChange = (e) => {
   const { name, value } = e.target;
   setFormData(prevFormData => ({
@@ -18,7 +18,7 @@ const handleChange = (e) => {
       [name]: value
   }))
 }
-console.log(formData)
+
   return (
     <div>
       <Link to='/home'>Home</Link>
@@ -28,6 +28,10 @@ console.log(formData)
           addEditFunction={postItem}
           formData={formData}
           handleChange={handleChange}
+          setToggle={setToggle}
+          setTempItem={setTempItem}
+          currentUser={currentUser}
+          toggleSet={'POST'}
         />
       </div>
     </div>

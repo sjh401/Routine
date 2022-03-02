@@ -1,30 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import Calendar from '../screens/calendar/Calendar';
 import Home from '../screens/home/Home';
 import ItemAdd from '../screens/item/ItemAdd';
 import ItemDetail from '../screens/item/ItemDetail';
 import ItemEdit from '../screens/item/ItemEdit';
 import User from '../screens/user/User';
-import { deleteItem, getAllItems, getItem, postItem, putItem } from '../services/items';
+import { deleteItem, getAllItems, getUserItems, postItem, putItem } from '../services/items';
 
 
 export default function Container(props) {
-    const [ allItems, setAllItems ] = useState([]);
     const { currentUser } = props;
+    const [ allItems, setAllItems ] = useState([]);
+    const [ toggle, setToggle ] = useState('');
+    const [ tempItem, setTempItem ] = useState({
+        description: '',
+        notes:'',
+        title:'',
+        completed: '',
+        id: 0,
+        user_id: currentUser?.id,
+        created_at: Date.now(),
+        updated: Date.now()
+    })
 
     useEffect(() => {
         const fetchItems = async () => {
             const items = await getAllItems();
             setAllItems(items?.filter(element => element.user_id === currentUser?.id));
         }
+        const fetchUserItems = async () => {
+            const userItems = await getUserItems();
+            console.log(userItems)
+        }
+        console.log('api call')
+        fetchUserItems();
         fetchItems();
     }, [currentUser]);
-    
-
 
     return(
         <>
+            {!currentUser && 
+            <div>
+                <h2>
+                    Hello there
+                </h2>
+                <img 
+                    src='https://hips.hearstapps.com/digitalspyuk.cdnds.net/16/49/1481301038-hot-fuzz.jpg' 
+                    alt='Nicholas Angel eating a cornetto'
+                    style={{height: '200px'}}
+                />
+                <Link to='/login'>Login</Link>
+                <Link to='/register'>Register</Link>
+            </div>
+            }
             <Routes>
                 <Route 
                     path="/home" 
@@ -32,6 +61,9 @@ export default function Container(props) {
                         <Home
                             currentUser={currentUser}
                             allItems={allItems}
+                            toggle={toggle}
+                            tempItem={tempItem}
+                            setToggle={setToggle}
                         />
                     }
                 />
@@ -39,6 +71,7 @@ export default function Container(props) {
                     path="/calendar" 
                     element={
                         <Calendar
+                            allItems={allItems}
                         />
                     }
                 />
@@ -48,6 +81,8 @@ export default function Container(props) {
                         <ItemAdd
                             postItem={postItem}
                             currentUser={currentUser}
+                            setToggle={setToggle}
+                            setTempItem={setTempItem}
                         />
                     }
                 />
@@ -59,6 +94,9 @@ export default function Container(props) {
                             putItem={putItem}
                             deleteItem={deleteItem}
                             currentUser={currentUser}
+                            setToggle={setToggle}
+                            setTempItem={setTempItem}
+                            tempItem={tempItem}
                         />
                     }
                 />
