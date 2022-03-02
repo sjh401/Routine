@@ -22,7 +22,7 @@ export default function Header(props) {
         {/* <Link to='/item/:id'>edit</Link>
         <Link to='/item'>item</Link> */}
         <Link to='/user'>user</Link>
-        <LogoutButton onClick={props.handleLogout}>Logout</LogoutButton>
+        {props.currentUser && <LogoutButton onClick={props.handleLogout}>Logout</LogoutButton>}
       </div>
     </header>
   )
