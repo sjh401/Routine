@@ -6,11 +6,12 @@ import ItemAdd from '../screens/item/ItemAdd';
 import ItemDetail from '../screens/item/ItemDetail';
 import ItemEdit from '../screens/item/ItemEdit';
 import User from '../screens/user/User';
-import { deleteItem, getAllItems, postItem, putItem } from '../services/items';
+import { deleteItem, getAllItems, getUserItems, postItem, putItem } from '../services/items';
 
 
 export default function Container(props) {
     const [ allItems, setAllItems ] = useState([]);
+    const [ toggle, setToggle ] = useState(false)
     const { currentUser } = props;
 
     useEffect(() => {
@@ -18,9 +19,13 @@ export default function Container(props) {
             const items = await getAllItems();
             setAllItems(items?.filter(element => element.user_id === currentUser?.id));
         }
+        const fetchUserItems = async () => {
+            const userItems = await getUserItems();
+            console.log(userItems)
+        }
+        fetchUserItems();
         fetchItems();
-    }, [currentUser]);
-    
+    }, [currentUser, toggle]);
 
 
     return(
@@ -53,6 +58,7 @@ export default function Container(props) {
                     path="/calendar" 
                     element={
                         <Calendar
+                            allItems={allItems}
                         />
                     }
                 />

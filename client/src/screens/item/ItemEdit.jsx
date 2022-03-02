@@ -33,7 +33,6 @@ const handleChange = (e) => {
   });
   }, [allItems])
 
-  console.log(formData)
   return (
     <div>
       <Link to='/home'>Home</Link>

@@ -18,7 +18,7 @@ const handleChange = (e) => {
       [name]: value
   }))
 }
-console.log(formData)
+
   return (
     <div>
       <Link to='/home'>Home</Link>

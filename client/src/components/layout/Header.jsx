@@ -17,10 +17,9 @@ export default function Header(props) {
   return (
     <header>
       <div>
+      <Link to='/home'>Home</Link>
         <Link to='/calendar'>Calendar</Link>
         <Link to='/item/add'>add</Link>
-        {/* <Link to='/item/:id'>edit</Link>
-        <Link to='/item'>item</Link> */}
         <Link to='/user'>user</Link>
         {props.currentUser && <LogoutButton onClick={props.handleLogout}>Logout</LogoutButton>}
       </div>

@@ -1,5 +1,14 @@
 import api from './api-config';
 
+export const getUserItems = async (id) => {
+    try {
+        let res = await api.get('/user/items');
+        return res.data
+    } catch (e) {
+        return ({ errors: e })
+    }
+}
+
 export const getAllItems = async () => {
     try {
         let res = await api.get(`/items`);

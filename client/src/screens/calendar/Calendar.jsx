@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Calendar() {
+export default function Calendar(props) {
 
-  return <div>
-    <Link to='/home'>Home</Link>
-  </div>;
+  return (
+    <div>
+      
+    </div>
+  )
 }
