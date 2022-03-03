@@ -26,8 +26,8 @@ export default function Container(props) {
 
     useEffect(() => {
         const fetchUserItems = async () => {
-            // const userItems = await getUserItems();
-            const userItems = await getAllItems();
+            const userItems = await getUserItems();
+
             setAllItems(userItems)
         }
         fetchUserItems();
@@ -36,6 +36,27 @@ export default function Container(props) {
     // useEffect(() => {
         
     // },[])
+
+    useEffect(() => {
+        console.log(allItems)
+        if(toggle === 'DELETE'){
+          setAllItems(allItems.filter(item => item.id !== Number(tempItem.id)))
+          setToggle(prevToggle => prevToggle ='')
+        } else if(toggle === 'POST'){
+          allItems.push(tempItem)
+          setAllItems(allItems)
+          setToggle(prevToggle => prevToggle ='')
+        } else if(toggle === 'PUT'){
+          setAllItems(allItems.map(item => {
+            if(item.id === Number(tempItem.id)){
+              return tempItem
+            } else {
+              return item
+            }
+          }))
+          setToggle(prevToggle => prevToggle ='')
+        }
+      },[toggle])
 
     return(
         <>

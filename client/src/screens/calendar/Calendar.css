@@ -1,6 +1,6 @@
 .calendar-grid {
     display: grid;
-    grid: repeat(7, 1fr)/ repeat(6,1fr);
+    grid: repeat(6, 1fr)/ repeat(7,1fr);
     width: 100vw;
     height: 80vh;
 }

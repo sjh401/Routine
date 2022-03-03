@@ -3,28 +3,7 @@ import { Link } from 'react-router-dom';
 import './Home.css'
 
 export default function Home(props) {
-  const { currentUser, setAllItems, allItems, toggle, setToggle, tempItem } = props;
-
-  useEffect(() => {
-    console.log(allItems)
-    if(toggle === 'DELETE'){
-      setAllItems(allItems.filter(item => item.id !== Number(tempItem.id)))
-      setToggle(prevToggle => prevToggle ='')
-    } else if(toggle === 'POST'){
-      allItems.push(tempItem)
-      setAllItems(allItems)
-      setToggle(prevToggle => prevToggle ='')
-    } else if(toggle === 'PUT'){
-      setAllItems(allItems.map(item => {
-        if(item.id === Number(tempItem.id)){
-          return tempItem
-        } else {
-          return item
-        }
-      }))
-      setToggle(prevToggle => prevToggle ='')
-    }
-  },[toggle])
+  const { currentUser, allItems } = props;
 
   return (
   <React.Fragment>

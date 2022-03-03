@@ -1,20 +1,16 @@
 class ItemsController < ApplicationController
-  before_action :authorize_request, except: [:index, :show, :userItems]
-  before_action :set_user
+  before_action :authorize_request
   before_action :set_item, only: [:show, :update, :destroy]
 
   # GET /items
   def index
-    # @items = Item.all
-    p "#{@current_user} on line 8 of items" 
-    p 'hello world'
-    @items = Item.where(user_id: 1)
+    @items = Item.where(user_id: @current_user.id)
     
     render json: @items
   end
   
-  # def userItems
-  
+  # def allItems
+  #   @items = Item.all()
   #   render json: @items
   # end
   
@@ -52,12 +48,6 @@ class ItemsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_item
     @item = Item.find(params[:id])
-  end
-  
-  def set_user
-    p 'this is the users id'
-    p @current_user
-    p @user
   end
 
     # Only allow a list of trusted parameters through.
