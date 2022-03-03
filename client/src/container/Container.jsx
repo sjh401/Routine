@@ -25,18 +25,17 @@ export default function Container(props) {
     })
 
     useEffect(() => {
-        const fetchItems = async () => {
-            const items = await getAllItems();
-            setAllItems(items?.filter(element => element.user_id === currentUser?.id));
-        }
         const fetchUserItems = async () => {
-            const userItems = await getUserItems();
-            console.log(userItems)
+            // const userItems = await getUserItems();
+            const userItems = await getAllItems();
+            setAllItems(userItems)
         }
-        console.log('api call')
         fetchUserItems();
-        fetchItems();
     }, [currentUser]);
+
+    // useEffect(() => {
+        
+    // },[])
 
     return(
         <>
@@ -60,6 +59,7 @@ export default function Container(props) {
                     element={
                         <Home
                             currentUser={currentUser}
+                            setAllItems={setAllItems}
                             allItems={allItems}
                             toggle={toggle}
                             tempItem={tempItem}
