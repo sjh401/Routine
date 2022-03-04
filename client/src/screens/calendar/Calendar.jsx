@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Calendar.css'
 
 export default function Calendar(props) {
@@ -7,17 +8,17 @@ export default function Calendar(props) {
   const [ monthItems, setMonthItems ] = useState([]);
   const [ month, setMonth ] = useState(today.getMonth());
   
+// TODO when I add a drop down to change the month
+  // const changeMonth = (month) => {
+  //   setMonth(month)
+  // }
+
   useEffect(() => {
     const monthlyItems = allItems.filter(item => new Date(item.created_at).getMonth() === month)
     setMonthItems(monthlyItems)
   },[month])
+
   const months = ['Janurary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const daysInMonth = {
-    31: "Janurary March May July August October December ",
-    30: "April June September November",
-    28: "February",
-    29: "February"
-  }
 
   //presets for the calendar
   let column = new Date(`${today.getMonth()}/1/${today.getFullYear()}`).getDay()
@@ -30,7 +31,6 @@ export default function Calendar(props) {
     <div>
       <h2>Monthly</h2>
       <h4>{months[today.getMonth()]}</h4>
-      {/* calendar */}
       <div className='calendar-grid'>
         {dates.map((date, index) => {
           if(column>7){
@@ -38,7 +38,6 @@ export default function Calendar(props) {
             row+=1
           }
           obj[date] = `${row}/${column}/${row + 1}/${column+1}`
-
           return (
             <div 
             key={`${date} ${index}`}
@@ -48,7 +47,7 @@ export default function Calendar(props) {
                 border: 'solid black 1px'
               }}>
               <div>
-                {date}
+                <Link to={`/calendar/${date}`}>{date}</Link>
               </div>
             </div>
           )
