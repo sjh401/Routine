@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Calendar.css'
 
 export default function Calendar(props) {
@@ -7,6 +7,10 @@ export default function Calendar(props) {
   const [ monthItems, setMonthItems ] = useState([]);
   const [ month, setMonth ] = useState(today.getMonth());
   
+  useEffect(() => {
+    const monthlyItems = allItems.filter(item => new Date(item.created_at).getMonth() === month)
+    setMonthItems(monthlyItems)
+  },[month])
   const months = ['Janurary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const daysInMonth = {
     31: "Janurary March May July August October December ",
@@ -46,20 +50,19 @@ export default function Calendar(props) {
               <div>
                 {date}
               </div>
-              <div style={{display:'grid', justifySelf:'center'}}>
-                4
-              </div>
             </div>
           )
         })}
-        {allItems.length && allItems.map(item => {
-            
+        {monthItems.length && monthItems.map(item => {
           return (
             <div
               key={item.id}
               style={{
-                display:'grid',
-                gridArea: `${obj[Number(item.created_at.toString().split('-')[1])]}`
+                display:'flex',
+                gridArea: `${obj[new Date(item.created_at).getDate()]}`,
+                justifySelf:'center',
+                alignSelf: 'center',
+                flexFlow: 'column wrap'
               }}
             >
               {item.title}
