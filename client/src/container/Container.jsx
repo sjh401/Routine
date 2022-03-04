@@ -25,18 +25,38 @@ export default function Container(props) {
     })
 
     useEffect(() => {
-        const fetchItems = async () => {
-            const items = await getAllItems();
-            setAllItems(items?.filter(element => element.user_id === currentUser?.id));
-        }
         const fetchUserItems = async () => {
             const userItems = await getUserItems();
-            console.log(userItems)
+
+            setAllItems(userItems)
         }
-        console.log('api call')
         fetchUserItems();
-        fetchItems();
     }, [currentUser]);
+
+    // useEffect(() => {
+        
+    // },[])
+
+    useEffect(() => {
+        console.log(allItems)
+        if(toggle === 'DELETE'){
+          setAllItems(allItems.filter(item => item.id !== Number(tempItem.id)))
+          setToggle(prevToggle => prevToggle ='')
+        } else if(toggle === 'POST'){
+          allItems.push(tempItem)
+          setAllItems(allItems)
+          setToggle(prevToggle => prevToggle ='')
+        } else if(toggle === 'PUT'){
+          setAllItems(allItems.map(item => {
+            if(item.id === Number(tempItem.id)){
+              return tempItem
+            } else {
+              return item
+            }
+          }))
+          setToggle(prevToggle => prevToggle ='')
+        }
+      },[toggle])
 
     return(
         <>
@@ -60,6 +80,7 @@ export default function Container(props) {
                     element={
                         <Home
                             currentUser={currentUser}
+                            setAllItems={setAllItems}
                             allItems={allItems}
                             toggle={toggle}
                             tempItem={tempItem}

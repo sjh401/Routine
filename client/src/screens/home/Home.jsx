@@ -3,40 +3,20 @@ import { Link } from 'react-router-dom';
 import './Home.css'
 
 export default function Home(props) {
-  const { currentUser, allItems, toggle, setToggle, tempItem } = props;
-  const [ items, setItems ] = useState([])
+  const { currentUser, allItems } = props;
 
-  useEffect(() => {
-    if(toggle === 'DELETE'){
-      setItems(allItems.filter(item => item.id !== Number(tempItem.id)))
-      setToggle(prevToggle => prevToggle ='')
-    } else if(toggle === 'POST'){
-      allItems.push(tempItem)
-      setItems(allItems)
-      setToggle(prevToggle => prevToggle ='')
-    } else if(toggle === 'PUT'){
-      setItems(allItems.map(item => {
-        if(item.id === Number(tempItem.id)){
-          return tempItem
-        } else {
-          return item
-        }
-      }))
-      setToggle(prevToggle => prevToggle ='')
-    } else {
-      setItems(allItems)
-    }
-  },[allItems])
   return (
   <React.Fragment>
       <div className='flex-row-wrap'>
         <h4>
           Welcome!!! Home
         </h4>
-        {currentUser?.first_name}
+        <h4>
+          {currentUser?.first_name}
+        </h4>
       </div>
       <div className='flex-row-wrap'>
-        {items?.map(item => {
+        {allItems?.map(item => {
           return (
             <div 
                 key={`${item.id} ${item.title}`}

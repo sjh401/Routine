@@ -4,12 +4,12 @@ class AuthenticationController < ApplicationController
     # POST /auth/login
     def login
     @user = User.find_by(username: login_params[:username])
-    if @user.authenticate(login_params[:password]) #authenticate method provided by Bcrypt and 'has_secure_password'
-        token = encode({id: @user.id})
-        render json: {
-            user: @user.attributes.except("password_digest"),
-            token: token
-            }, status: :ok
+        if @user.authenticate(login_params[:password]) #authenticate method provided by Bcrypt and 'has_secure_password'
+            token = encode({id: @user.id})
+            render json: {
+                user: @user.attributes.except("password_digest"),
+                token: token
+                }, status: :ok
         else
             render json: { errors: 'unauthorized' }, status: :unauthorized
         end
@@ -17,6 +17,8 @@ class AuthenticationController < ApplicationController
     
     # GET /auth/verify
     def verify
+        p 'from verify user stephen'
+        p @current_user
         render json: @current_user.attributes.except("password_digest"), status: :ok
     end
 

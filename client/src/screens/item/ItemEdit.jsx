@@ -42,9 +42,6 @@ const handleChange = (e) => {
     updated: Date.now()
 })
   }, [])
-console.log(allItems)
-  console.log('formData')
-console.log(tempItem)
 
   return (
     <div>
