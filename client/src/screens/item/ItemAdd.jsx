@@ -9,6 +9,7 @@ export default function ItemAdd(props) {
     notes: '',
     title: '',
     completed: false,
+    to_do_date: Date.now(),
 });
 // const toggleSet = 'ADD'
 const handleChange = (e) => {

@@ -14,7 +14,7 @@ export default function Calendar(props) {
   // }
 
   useEffect(() => {
-    const monthlyItems = allItems.filter(item => new Date(item.created_at).getMonth() === month)
+    const monthlyItems = allItems.filter(item => new Date(item.to_do_date).getMonth() === month)
     setMonthItems(monthlyItems)
   },[month])
 
@@ -58,7 +58,7 @@ export default function Calendar(props) {
               key={item.id}
               style={{
                 display:'flex',
-                gridArea: `${obj[new Date(item.created_at).getDate()]}`,
+                gridArea: `${obj[new Date(item.to_do_date).getDate() + 1]}`,
                 justifySelf:'center',
                 alignSelf: 'center',
                 flexFlow: 'column wrap'

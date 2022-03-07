@@ -11,7 +11,8 @@ export default function ItemEdit(props) {
     description: '',
     notes: '',
     title: '',
-    completed: false
+    completed: false,
+    to_do_date: new Date
 });
 
 const handleChange = (e) => {
@@ -28,20 +29,15 @@ const handleChange = (e) => {
       description: singleItem[0].description ,
       notes: singleItem[0].notes ,
       title: singleItem[0].title ,
+      to_do_date: singleItem[0].to_do_date,
+      // Date(singleItem[0].to_do_date.toString().split(' ')[3], singleItem[0].to_do_date.toString().split(' ')[1], singleItem[0].to_do_date.toString().split(' ')[2]),
       completed: singleItem[0].completed
-  });
-  setTempItem({
-    description: singleItem[0].description ,
-    notes: singleItem[0].notes ,
-    title: singleItem[0].title ,
-    completed: singleItem[0].completed,
-    id: Number(item_id.id),
-    user_id: currentUser?.id,
-    created_at: Date.now(),
-    updated: Date.now()
-})
-  }, [])
+    });
+    setTempItem(singleItem)
+  }, [allItems])
 
+  // console.log(Date(formData?.to_do_date.toString().split(' ')[3], formData?.to_do_date.toString().split(' ')[1], formData?.to_do_date.toString().split(' ')[2]))
+  // console.log(formData.to_do_date.substring(0,10))
   return (
     <div>
       <Link to='/home'>Home</Link>

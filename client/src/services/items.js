@@ -37,8 +37,6 @@ export const postItem = async (itemData) => {
 }
 
 export const putItem = async (itemData, id) => {
-    console.log(itemData)
-    console.log('stephen')
     try {
         let res = await api.put(`/items/${id}`, { item: itemData });
         return res.data;
