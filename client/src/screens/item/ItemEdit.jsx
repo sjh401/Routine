@@ -28,8 +28,7 @@ const handleChange = (e) => {
       description: singleItem[0].description ,
       notes: singleItem[0].notes ,
       title: singleItem[0].title ,
-      completed: singleItem[0].completed,
-      id: Number(item_id.id)
+      completed: singleItem[0].completed
   });
   setTempItem({
     description: singleItem[0].description ,
@@ -55,6 +54,7 @@ const handleChange = (e) => {
           setToggle={setToggle}
           setTempItem={setTempItem}
           currentUser={currentUser}
+          item_id={item_id.id}
           toggleSet={'PUT'}
         />
       </div>

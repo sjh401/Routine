@@ -15,7 +15,7 @@ const LoginButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function ItemAddEdit(props) {
-    const { addEditFunction, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet } = props;
+    const { addEditFunction, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id } = props;
     const navigate = useNavigate()
 
     return (
@@ -24,7 +24,7 @@ export default function ItemAddEdit(props) {
                 className=""
                 onSubmit={(e) => {
                 e.preventDefault()
-                addEditFunction(formData)
+                addEditFunction(formData, item_id)
                 setToggle(prevToggle => prevToggle = toggleSet)
                 setTempItem({
                     ...formData,
