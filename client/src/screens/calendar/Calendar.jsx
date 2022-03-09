@@ -13,20 +13,37 @@ export default function Calendar(props) {
   //   setMonth(month)
   // }
 
-  useEffect(() => {
-    const monthlyItems = allItems.filter(item => new Date(item.to_do_date).getMonth() === month)
-    setMonthItems(monthlyItems)
-  },[month])
-
+  
   const months = ['Janurary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
+  
   //presets for the calendar
   let column = new Date(`${today.getMonth()}/1/${today.getFullYear()}`).getDay()
   const dates = new Array(new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).fill(0).map((element, index) => element = index+1)
   let row = 1;
-
+  
+  const dayTaskCount = {}
   let obj = new Object()
   console.log(allItems)
+  
+  useEffect(() => {
+    const monthlyItems = allItems.filter(item => new Date(item.to_do_date).getMonth() === month)
+    setMonthItems(monthlyItems)
+
+  },[month])
+
+  const taskCount = (array) => {
+    array.forEach(item => {
+      let date = new Date(item.to_do_date).getDate() + 1
+      if(!dayTaskCount[date]){
+        dayTaskCount[date] = 1;
+      } else {
+        dayTaskCount[date] += 1;
+      }
+    })
+  }
+  
+  taskCount(monthItems)
+
   return (
     <div>
       <h2>Monthly</h2>
@@ -49,27 +66,12 @@ export default function Calendar(props) {
               <div>
                 <Link to={`/calendar/${date}`}>{date}</Link>
               </div>
+              <div>
+                {dayTaskCount[date] > 0 ? dayTaskCount[date]: ''}
+              </div>
             </div>
           )
         })}
-        {monthItems.length && monthItems.map(item => {
-          return (
-            <div
-              key={item.id}
-              style={{
-                display:'flex',
-                gridArea: `${obj[new Date(item.to_do_date).getDate() + 1]}`,
-                justifySelf:'center',
-                alignSelf: 'center',
-                flexFlow: 'column wrap'
-              }}
-            >
-              {item.title}
-            </div>
-          )
-        })
-
-        }
       </div>
     </div>
   )
