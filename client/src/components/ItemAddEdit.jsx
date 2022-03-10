@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Checkbox, FormControlLabel, Button, TextField, styled } from '@mui/material';
 
@@ -19,10 +19,16 @@ const ItemTextField = styled(TextField)(({  theme }) => ({
 }))
 
 export default function ItemAddEdit(props) {
-    const { addEditFunction, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id } = props;
+    const { addEditFunction, checked, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id } = props;
     const navigate = useNavigate()
+    const [ checkbox, setCheckbox ] = useState(checked)
+    const [ date, setDate ] = useState('')
 
-    console.log(formData)
+    useEffect(() => {
+        setDate(`${formData.to_do_date.toString().split(' ')[3]}-${formData.to_do_date.toString().split(' ')[1]}-${formData.to_do_date.toString().split(' ')[2]}`)
+        console.log(date)
+    },[formData])
+
     return (
         <div className="">
             <form 
@@ -67,13 +73,14 @@ export default function ItemAddEdit(props) {
                 <br/>
                 <input 
                     type={'date'} 
+                    // placeholder={formData?.to_do_date.substring(0,10)}
                     style={{  
                         width: '60vw',
                         maxWidth: 194,
                         margin: '10px 0px 0px 10px',
                     }}
                     name='to_do_date'
-                    value={formData?.to_do_date}
+                    value={date}
                     onChange={handleChange}
                 />
                 <br/>
@@ -81,10 +88,15 @@ export default function ItemAddEdit(props) {
                     label='Complete?' 
                     name='completed'
                     // {formData?.completed === true? defaultChecked : ''}
-                    checked={formData?.completed}
+                    checked={checkbox}
                     control={
                         <Checkbox 
-                        onChange={(e) => formData.completed = e.target.checked}
+                        onChange={
+                            (e) => {
+                                formData.completed = e.target.checked
+                                setCheckbox(prevCheckBox => !prevCheckBox)
+                            }
+                        }
                         />}
                     onChange={handleChange}
                     value={formData?.completed}

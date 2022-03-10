@@ -6,7 +6,7 @@ export default function ItemEdit(props) {
   const { putItem, allItems, deleteItem, setToggle, setTempItem, currentUser, tempItem } = props;
   const item_id = useParams();
   const navigate = useNavigate();
-
+  const [ checkbox, setCheckbox ] = useState(false)
   const [ formData, setFormData ] = useState({
     description: '',
     notes: '',
@@ -34,6 +34,7 @@ const handleChange = (e) => {
       completed: singleItem[0].completed
     });
     setTempItem(singleItem)
+    setCheckbox(singleItem[0].completed)
   }, [allItems])
 
   // console.log(Date(formData?.to_do_date.toString().split(' ')[3], formData?.to_do_date.toString().split(' ')[1], formData?.to_do_date.toString().split(' ')[2]))
@@ -52,6 +53,7 @@ const handleChange = (e) => {
           currentUser={currentUser}
           item_id={item_id.id}
           toggleSet={'PUT'}
+          checked={checkbox}
         />
       </div>
       <button onClick={() => {
