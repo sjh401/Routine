@@ -8,27 +8,32 @@ const LoginButton = styled(Button)(({ theme }) => ({
   fontFamily: 'Poppins, sans-serif',
   width: '60vw',
   maxWidth: 194,
-  marginTop: 10,
+  marginTop: 20,
   '&:hover': {
       backgroundColor: '#4fa8fc',
   },
 }));
 
+const ItemTextField = styled(TextField)(({  theme }) => ({
+    margin: '10px 0px 0px 10px',
+}))
+
 export default function ItemAddEdit(props) {
-    const { addEditFunction, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet } = props;
+    const { addEditFunction, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id } = props;
     const navigate = useNavigate()
 
+    console.log(formData)
     return (
         <div className="">
             <form 
                 className=""
                 onSubmit={(e) => {
                 e.preventDefault()
-                addEditFunction(formData)
+                addEditFunction(formData, item_id)
                 setToggle(prevToggle => prevToggle = toggleSet)
                 setTempItem({
                     ...formData,
-                    id: 0,
+                    id: Math.random(),
                     user_id: currentUser?.id,
                     created_at: Date.now(),
                     updated: Date.now()
@@ -36,7 +41,7 @@ export default function ItemAddEdit(props) {
                 navigate('/home')
                 }}>
                 <br/>
-                <TextField 
+                <ItemTextField 
                     required 
                     label="Title"
                     name="title"
@@ -44,7 +49,7 @@ export default function ItemAddEdit(props) {
                     value={formData?.title}
                     onChange={handleChange}/>
                 <br/>
-                <TextField 
+                <ItemTextField 
                     required 
                     label="Description"
                     name="description"
@@ -52,13 +57,25 @@ export default function ItemAddEdit(props) {
                     value={formData?.description}
                     onChange={handleChange}/>
                 <br/>
-                <TextField 
+                <ItemTextField 
                     required 
                     label="Notes"
                     name="notes"
                     variant="outlined" 
                     value={formData?.notes}
                     onChange={handleChange}/>
+                <br/>
+                <input 
+                    type={'date'} 
+                    style={{  
+                        width: '60vw',
+                        maxWidth: 194,
+                        margin: '10px 0px 0px 10px',
+                    }}
+                    name='to_do_date'
+                    value={formData?.to_do_date}
+                    onChange={handleChange}
+                />
                 <br/>
                 <FormControlLabel 
                     label='Complete?' 

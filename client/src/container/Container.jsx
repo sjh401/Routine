@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import Calendar from '../screens/calendar/Calendar';
+import CalendarDay from '../screens/calendar/CalendarDay';
 import Home from '../screens/home/Home';
 import ItemAdd from '../screens/item/ItemAdd';
 import ItemDetail from '../screens/item/ItemDetail';
@@ -93,6 +94,15 @@ export default function Container(props) {
                     element={
                         <Calendar
                             allItems={allItems}
+                        />
+                    }
+                />
+                <Route 
+                    path="/calendar/:date"
+                    element={
+                        <CalendarDay
+                            allItems={allItems}
+                            currentUser={currentUser}
                         />
                     }
                 />

@@ -1,13 +1,13 @@
 import api from './api-config';
 
-export const getAllItems = async (id) => {
-    try {
-        let res = await api.get('/user/items');
-        return res.data
-    } catch (e) {
-        return ({ errors: e })
-    }
-}
+// export const getAllItems = async (id) => {
+//     try {
+//         let res = await api.get('/user/items');
+//         return res.data
+//     } catch (e) {
+//         return ({ errors: e })
+//     }
+// }
 
 export const getUserItems = async () => {
     try {
@@ -36,9 +36,9 @@ export const postItem = async (itemData) => {
     }
 }
 
-export const putItem = async (itemData) => {
+export const putItem = async (itemData, id) => {
     try {
-        let res = await api.put(`/items/${itemData.id}`, { item: itemData });
+        let res = await api.put(`/items/${id}`, { item: itemData });
         return res.data;
     } catch (e) {
         return ({ errors: e })

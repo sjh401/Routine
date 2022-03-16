@@ -9,11 +9,6 @@ class ItemsController < ApplicationController
     render json: @items
   end
   
-  # def allItems
-  #   @items = Item.all()
-  #   render json: @items
-  # end
-  
   # GET /items/1
   def show
     render json: @item
@@ -32,6 +27,7 @@ class ItemsController < ApplicationController
   
   # PATCH/PUT /items/1
   def update
+    @item.to_do_date = Date.new
     if @item.update(item_params)
       render json: @item
     else
@@ -52,6 +48,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:title, :description, :notes, :completed)
+      params.require(:item).permit(:title, :description, :notes, :completed, :to_do_date)
     end
 end
