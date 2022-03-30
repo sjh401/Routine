@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { Checkbox, FormControlLabel, Button, TextField, styled } from '@mui/material';
 
 const LoginButton = styled(Button)(({ theme }) => ({
-  color: '#fff',
-  backgroundColor: '#ff7777',
-  fontFamily: 'Poppins, sans-serif',
-  width: '60vw',
-  maxWidth: 194,
-  marginTop: 20,
-  '&:hover': {
-      backgroundColor: '#4fa8fc',
-  },
+    color: '#fff',
+    backgroundColor: '#ff7777',
+    fontFamily: 'Poppins, sans-serif',
+    width: '60vw',
+    maxWidth: 194,
+    marginTop: 20,
+    '&:hover': {
+        backgroundColor: '#4fa8fc',
+    },
 }));
 
 const ItemTextField = styled(TextField)(({  theme }) => ({
@@ -19,16 +19,11 @@ const ItemTextField = styled(TextField)(({  theme }) => ({
 }))
 
 export default function ItemAddEdit(props) {
-    const { addEditFunction, checked, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id } = props;
+    const { addEditFunction, date, setDate, checked, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id } = props;
     const navigate = useNavigate()
     const [ checkbox, setCheckbox ] = useState(checked)
-    const [ date, setDate ] = useState('')
-
-    useEffect(() => {
-        setDate(`${formData.to_do_date.toString().split(' ')[3]}-${formData.to_do_date.toString().split(' ')[1]}-${formData.to_do_date.toString().split(' ')[2]}`)
-        console.log(date)
-    },[formData])
-
+    
+    console.log(date)
     return (
         <div className="">
             <form 
@@ -81,7 +76,10 @@ export default function ItemAddEdit(props) {
                     }}
                     name='to_do_date'
                     value={date}
-                    onChange={handleChange}
+                    onChange={(e)=>{
+                        formData.to_do_date = e.target.value
+                        setDate(e.target.value)
+                    }}
                 />
                 <br/>
                 <FormControlLabel 
