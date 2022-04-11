@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Checkbox, FormControlLabel, Button, TextField, styled } from '@mui/material';
 
 const LoginButton = styled(Button)(({ theme }) => ({
-  color: '#fff',
-  backgroundColor: '#ff7777',
-  fontFamily: 'Poppins, sans-serif',
-  width: '60vw',
-  maxWidth: 194,
-  marginTop: 20,
-  '&:hover': {
-      backgroundColor: '#4fa8fc',
-  },
+    color: '#fff',
+    backgroundColor: '#ff7777',
+    fontFamily: 'Poppins, sans-serif',
+    width: '60vw',
+    maxWidth: 194,
+    marginTop: 20,
+    '&:hover': {
+        backgroundColor: '#4fa8fc',
+    },
 }));
 
 const ItemTextField = styled(TextField)(({  theme }) => ({
@@ -19,10 +19,14 @@ const ItemTextField = styled(TextField)(({  theme }) => ({
 }))
 
 export default function ItemAddEdit(props) {
-    const { addEditFunction, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id } = props;
+    const { addEditFunction, date, setDate, checked, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id } = props;
     const navigate = useNavigate()
-
-    console.log(formData)
+    const [ checkbox, setCheckbox ] = useState(checked)
+    
+    useEffect(() => {
+        setCheckbox(checked)
+    },[checked])
+    
     return (
         <div className="">
             <form 
@@ -33,7 +37,7 @@ export default function ItemAddEdit(props) {
                 setToggle(prevToggle => prevToggle = toggleSet)
                 setTempItem({
                     ...formData,
-                    id: Math.random(),
+                    id: formData.id,
                     user_id: currentUser?.id,
                     created_at: Date.now(),
                     updated: Date.now()
@@ -67,24 +71,33 @@ export default function ItemAddEdit(props) {
                 <br/>
                 <input 
                     type={'date'} 
+                    // placeholder={formData?.to_do_date.substring(0,10)}
                     style={{  
                         width: '60vw',
                         maxWidth: 194,
                         margin: '10px 0px 0px 10px',
                     }}
                     name='to_do_date'
-                    value={formData?.to_do_date}
-                    onChange={handleChange}
+                    value={date}
+                    onChange={(e)=>{
+                        formData.to_do_date = e.target.value
+                        setDate(e.target.value)
+                    }}
                 />
                 <br/>
                 <FormControlLabel 
                     label='Complete?' 
                     name='completed'
                     // {formData?.completed === true? defaultChecked : ''}
-                    checked={formData?.completed}
+                    checked={checkbox}
                     control={
                         <Checkbox 
-                        onChange={(e) => formData.completed = e.target.checked}
+                        onChange={
+                            (e) => {
+                                formData.completed = e.target.checked
+                                setCheckbox(prevCheckBox => !prevCheckBox)
+                            }
+                        }
                         />}
                     onChange={handleChange}
                     value={formData?.completed}

@@ -12,7 +12,6 @@ export default function Calendar(props) {
   // const changeMonth = (month) => {
   //   setMonth(month)
   // }
-
   
   const months = ['Janurary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   
@@ -66,9 +65,7 @@ export default function Calendar(props) {
               <div>
                 <Link to={`/calendar/${date}`}>{date}</Link>
               </div>
-              <div>
-                {dayTaskCount[date] > 0 ? dayTaskCount[date]: ''}
-              </div>
+                {dayTaskCount[date] > 0 ? <div style={{justifySelf: 'center'}}>{dayTaskCount[date]}</div>: null}
             </div>
           )
         })}

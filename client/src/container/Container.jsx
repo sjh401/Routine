@@ -39,23 +39,24 @@ export default function Container(props) {
     // },[])
 
     useEffect(() => {
-        console.log(allItems)
         if(toggle === 'DELETE'){
-          setAllItems(allItems.filter(item => item.id !== Number(tempItem.id)))
-          setToggle(prevToggle => prevToggle ='')
+            setAllItems(allItems.filter(item => item.id !== Number(tempItem.id)))
+            setToggle(prevToggle => prevToggle ='')
         } else if(toggle === 'POST'){
-          allItems.push(tempItem)
-          setAllItems(allItems)
-          setToggle(prevToggle => prevToggle ='')
+            allItems.push(tempItem)
+            setAllItems(allItems)
+            setToggle(prevToggle => prevToggle ='')
         } else if(toggle === 'PUT'){
-          setAllItems(allItems.map(item => {
-            if(item.id === Number(tempItem.id)){
-              return tempItem
-            } else {
-              return item
-            }
-          }))
-          setToggle(prevToggle => prevToggle ='')
+            setAllItems(allItems.map(item => {
+                if(item.id === Number(tempItem.id)){
+                    console.log('here')
+                    return tempItem
+                } else {
+                    return item
+                }
+            }))
+            setToggle(prevToggle => prevToggle ='')
+            console.log(allItems)
         }
       },[toggle])
 
