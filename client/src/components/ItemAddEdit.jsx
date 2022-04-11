@@ -23,7 +23,10 @@ export default function ItemAddEdit(props) {
     const navigate = useNavigate()
     const [ checkbox, setCheckbox ] = useState(checked)
     
-    console.log(date)
+    useEffect(() => {
+        setCheckbox(checked)
+    },[checked])
+    
     return (
         <div className="">
             <form 
@@ -34,7 +37,7 @@ export default function ItemAddEdit(props) {
                 setToggle(prevToggle => prevToggle = toggleSet)
                 setTempItem({
                     ...formData,
-                    id: Math.random(),
+                    id: formData.id,
                     user_id: currentUser?.id,
                     created_at: Date.now(),
                     updated: Date.now()

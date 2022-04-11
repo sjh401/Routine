@@ -16,7 +16,7 @@ export default function Home(props) {
         </h4>
       </div>
       <div className='flex-row-wrap'>
-        {allItems?.map(item => {
+        {allItems.length && allItems.map(item => {
           return (
             <div 
                 key={`${item.id} ${item.title}`}
