@@ -28,7 +28,6 @@ export default function Calendar(props) {
     setMonthItems(monthlyItems)
   },[month])
 
-
   const taskCount = (array) => {
     array.forEach(item => {
       let date = new Date(item.to_do_date).getDate() + 1
