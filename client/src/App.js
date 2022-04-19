@@ -16,6 +16,7 @@ const App = () => {
     const handleVerify = async () => {
       const userData = await verifyUser();
       setCurrentUser(userData)
+      console.log(userData)
     } 
     handleVerify();
   },[])

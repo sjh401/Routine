@@ -19,7 +19,7 @@ const ItemTextField = styled(TextField)(({  theme }) => ({
 }))
 
 export default function ItemAddEdit(props) {
-    const { addEditFunction, date, setDate, checked, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id } = props;
+    const { addEditFunction, date, setDate, checked, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id, edit } = props;
     const navigate = useNavigate()
     const [ checkbox, setCheckbox ] = useState(checked)
     
@@ -81,7 +81,9 @@ export default function ItemAddEdit(props) {
                     value={date}
                     onChange={(e)=>{
                         formData.to_do_date = e.target.value
-                        setDate(e.target.value)
+                        if(edit === true) {
+                            setDate(e.target.value)
+                        }
                     }}
                 />
                 <br/>
