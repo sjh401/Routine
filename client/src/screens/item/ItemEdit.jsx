@@ -14,9 +14,7 @@ export default function ItemEdit(props) {
     completed: false,
     to_do_date: new Date
 });
-
 const [ date, setDate ] = useState('')
-    
 
 const handleChange = (e) => {
   const { name, value } = e.target;
@@ -55,6 +53,7 @@ useEffect(() => {
           checked={checkbox}
           date={date}
           setDate={setDate}
+          edit={true}
         />
       </div>
       <button onClick={() => {

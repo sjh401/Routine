@@ -34,6 +34,7 @@ const handleChange = (e) => {
           currentUser={currentUser}
           toggleSet={'POST'}
           checked={false}
+          edit={false}
         />
       </div>
     </div>

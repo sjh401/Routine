@@ -4,9 +4,10 @@ import './Home.css'
 
 export default function Home(props) {
   const { currentUser, allItems } = props;
-
   const today = new Date();
-  console.log(allItems[0]?.to_do_date)
+  const [ month, setMonth ] = useState(today.getMonth() + 1)
+
+  console.log(allItems)
   console.log(today.getDate())
   return (
   <React.Fragment>
@@ -45,16 +46,30 @@ export default function Home(props) {
                   </div>
               )
             })}
+            {
+              (allItems.length && allItems.filter(item => {
+                if(Number(item.to_do_date.substring(8,10)) === today.getDate()){
+                  return item
+                }
+                }).length === 0) && 
+                <div>
+                  Nothing scheduled for {today.getMonth() +1}/{today.getDate()}
+                </div>
+            }
           </div>
         </div>
         <div>
           <h3>
-            Upcoming
+            Upcoming for {month}
           </h3>
+          <div>
+            <h5>Select Month</h5>
+
+          </div>
           <div>
           
             {allItems.length && allItems.filter(item => {
-              if(Number(item.to_do_date.substring(8,10)) > today.getDate() && Number(item.to_do_date.substring(6,8)) > today.getMonth() + 1){
+              if(Number(item.to_do_date.substring(8,10)) > today.getDate() && Number(item.to_do_date.substring(5,7)) === month){
                 return item
               }
               }).map(item => {
