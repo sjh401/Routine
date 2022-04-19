@@ -75,20 +75,12 @@ export default function Calendar(props) {
                   <Link to={`/calendar/${date}`}>
                     {date}
                   </Link>
+                </div >
+                {dayTaskCount[date] > 0 ? 
+                <div style={{display: 'flex',justifySelf: 'center', alignSelf:'flex-start', height: 66}}>
+                    {dayTaskCount[date]}
                 </div>
-                  {dayTaskCount[date] > 0 ? 
-                  <>
-                  <div style={{justifySelf: 'center', alignSelf:'flex-start'}}>
-                    <div>
-                      {dayTaskCount[date]}
-                    </div>
-                    <div>
-                      {dayTaskCount[date] === 1 ? 'task':'tasks'}
-                    </div>
-                  </div>
-                  {/* <div style></div> */}
-                  </>
-                  : null}
+                : null}
               </div>
             )
           })}
