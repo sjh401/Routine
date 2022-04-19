@@ -7,8 +7,6 @@ export default function Home(props) {
   const today = new Date();
   const [ month, setMonth ] = useState(today.getMonth() + 1)
 
-  console.log(allItems)
-  console.log(today.getDate())
   return (
   <React.Fragment>
       <div className='flex-row-wrap'>
@@ -64,6 +62,7 @@ export default function Home(props) {
           </h3>
           <div>
             <h5>Select Month</h5>
+            <form action=""></form>
 
           </div>
           <div>
