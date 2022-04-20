@@ -9,16 +9,19 @@
 footer {
     height: 10vh;
     min-height: 50px;
+    min-width: 1250px;
     background-color: #c9ada7;
 }
 header {
     height: 10vh;
     min-height: 50px;
+    min-width: 1250px;
     background-color: #c9ada7;
 }
 main {
     height: 80vh;
-    min-height: 300px;
+    min-height: 625px;
+    min-width: 1250px;
     background-color: #f2e9e4;
 }
 

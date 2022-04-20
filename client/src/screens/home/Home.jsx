@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css'
 
 export default function Home(props) {
   const { currentUser, allItems } = props;
   const today = new Date();
-  const [ month, setMonth ] = useState(today.getMonth() + 1)
+  const month = today.getMonth() + 1
 
   return (
   <React.Fragment>
