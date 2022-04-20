@@ -3,7 +3,7 @@
     justify-content: center;
     grid: repeat(6, 1fr)/ repeat(7,1fr);
     width: 1190px;
-    height: 600px;
+    height: 540px;
     /* border: 1px black solid; */
 }
 .date-link {

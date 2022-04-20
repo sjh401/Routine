@@ -6,13 +6,13 @@ export default function CalendarDay(props) {
     const { date } = useParams();
     const [ items, setItems ] = useState([])
 
-    console.log(Number(date))
     useEffect(() => {
-        console.log(allItems)
-        const todaysItems = allItems.filter(item => new Date(item.to_do_date).getDate() + 1 === Number(date))
+        let theItems;
+        allItems.length ? theItems = allItems : theItems = [];
+        const todaysItems = theItems?.filter(item => new Date(item.to_do_date).getDate() + 1 === Number(date))
         setItems(todaysItems)
     },[allItems])
-    console.log(items)
+
     return (
         <div>{items?.map(item => {
 
