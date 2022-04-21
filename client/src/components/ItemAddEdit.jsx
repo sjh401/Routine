@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Checkbox, FormControlLabel, Button, TextField, styled } from '@mui/material';
-
-const LoginButton = styled(Button)(({ theme }) => ({
-    color: '#fff',
-    backgroundColor: '#ff7777',
-    fontFamily: 'Poppins, sans-serif',
-    width: '60vw',
-    maxWidth: 194,
-    marginTop: 20,
-    '&:hover': {
-        backgroundColor: '#4fa8fc',
-    },
-}));
-
-const ItemTextField = styled(TextField)(({  theme }) => ({
-    margin: '10px 0px 0px 10px',
-}))
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker'
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTime } from 'luxon';
 
 export default function ItemAddEdit(props) {
+    const LoginButton = styled(Button)(({ theme }) => ({
+        color: '#f2e9e4',
+        backgroundColor: '#4a4e69',
+        fontFamily: 'Poppins, sans-serif',
+        width: 100,
+        '&:hover': {
+            backgroundColor: '#9a8c98',
+            color: '#f2e9e4'
+        },
+    }));
+    
+    const ItemTextField = styled(TextField)(({  theme }) => ({
+        margin: '10px 0px 0px 10px',
+    }))
     const { addEditFunction, date, setDate, checked, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id, edit } = props;
     const navigate = useNavigate()
     const [ checkbox, setCheckbox ] = useState(checked)
@@ -69,7 +71,7 @@ export default function ItemAddEdit(props) {
                     value={formData?.notes}
                     onChange={handleChange}/>
                 <br/>
-                <input 
+                {/* <input 
                     type={'date'} 
                     // placeholder={formData?.to_do_date.substring(0,10)}
                     style={{  
@@ -85,7 +87,25 @@ export default function ItemAddEdit(props) {
                             setDate(e.target.value)
                         }
                     }}
-                />
+                /> */}
+                <br/>
+                <LocalizationProvider 
+                dateAdapter={AdapterLuxon}>
+
+                    <DesktopDatePicker 
+                        label="Date desktop"
+                        inputFormat="MM/dd/yyyy"
+                        name='to_do_date'
+                        value={formData.to_do_date}
+                        onChange={(e)=>{
+                            formData.to_do_date = DateTime.local(e).toLocaleString()
+                            if(edit === true) {
+                                setDate(DateTime.local(e).toLocaleString())
+                            }
+                        }}
+                        renderInput={(params) => <TextField {...params} />}
+                    />
+                </LocalizationProvider>
                 <br/>
                 <FormControlLabel 
                     label='Complete?' 

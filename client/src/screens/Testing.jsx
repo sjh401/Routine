@@ -1,32 +1,52 @@
 import * as React from 'react';
-import { createTheme, styled, ThemeProvider, darken } from '@mui/material/styles';
-import Slider from '@mui/material/Slider';
-import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { DateTime } from 'luxon';
 
-const customTheme = createTheme({
-  palette: {
-    primary: {
-      main: '#20b2aa',
-    },
-  },
-});
+export default function MaterialUIPickers() {
+  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
 
-const CustomizedSlider = styled(Slider)(
-  ({ theme }) => `
-  color: ${theme.palette.primary.main};
+  console.log(DateTime.local(value).toLocaleString())
 
-  :hover {
-    color: ${darken(theme.palette.primary.main, 0.2)};
-  }
-`,
-);
-
-export default function StyledComponentsTheme() {
   return (
-    <Box sx={{ width: 300 }}>
-      <ThemeProvider theme={customTheme}>
-        <CustomizedSlider defaultValue={30} />
-      </ThemeProvider>
-    </Box>
+    <LocalizationProvider dateAdapter={AdapterLuxon}>
+      <Stack spacing={3}>
+        <DesktopDatePicker
+          label="Date desktop"
+          inputFormat="MM/dd/yyyy"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} />}
+        />
+        <MobileDatePicker
+          label="Date mobile"
+          inputFormat="MM/dd/yyyy"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} />}
+        />
+        <TimePicker
+          label="Time"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} />}
+        />
+        <DateTimePicker
+          label="Date&Time picker"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </Stack>
+    </LocalizationProvider>
   );
 }
