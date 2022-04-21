@@ -1,3 +1,6 @@
+.cal-day-main {
+    padding-top: 10px;
+}
 .calendar-grid {
     display: grid;
     justify-content: center;

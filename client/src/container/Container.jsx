@@ -6,6 +6,7 @@ import Home from '../screens/home/Home';
 import ItemAdd from '../screens/item/ItemAdd';
 import ItemDetail from '../screens/item/ItemDetail';
 import ItemEdit from '../screens/item/ItemEdit';
+import StyledComponentsTheme from '../screens/Testing';
 import User from '../screens/user/User';
 import { deleteItem, getAllItems, getUserItems, postItem, putItem } from '../services/items';
 
@@ -146,6 +147,12 @@ export default function Container(props) {
                         <User
                             currentUser={currentUser}
                         />
+                    }
+                />
+                <Route
+                    path="/testing"
+                    element={
+                        <StyledComponentsTheme/>
                     }
                 />
             </Routes>
