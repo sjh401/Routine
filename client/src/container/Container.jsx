@@ -6,6 +6,7 @@ import Home from '../screens/home/Home';
 import ItemAdd from '../screens/item/ItemAdd';
 import ItemDetail from '../screens/item/ItemDetail';
 import ItemEdit from '../screens/item/ItemEdit';
+import StyledComponentsTheme from '../screens/Testing';
 import User from '../screens/user/User';
 import { deleteItem, getAllItems, getUserItems, postItem, putItem } from '../services/items';
 
@@ -62,11 +63,11 @@ export default function Container(props) {
 
     return(
         <>
-            {!currentUser && 
+            {!currentUser ? 
             <div>
-                <h2>
+                <div>
                     Hello there
-                </h2>
+                </div>
                 <img 
                     src='https://hips.hearstapps.com/digitalspyuk.cdnds.net/16/49/1481301038-hot-fuzz.jpg' 
                     alt='Nicholas Angel eating a cornetto'
@@ -74,8 +75,8 @@ export default function Container(props) {
                 />
                 <Link to='/login'>Login</Link>
                 <Link to='/register'>Register</Link>
-            </div>
-            }
+            </div> :
+            
             <Routes>
                 <Route 
                     path="/home" 
@@ -148,7 +149,14 @@ export default function Container(props) {
                         />
                     }
                 />
+                <Route
+                    path="/testing"
+                    element={
+                        <StyledComponentsTheme/>
+                    }
+                />
             </Routes>
+            }
         </>
 
     )

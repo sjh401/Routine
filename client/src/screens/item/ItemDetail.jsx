@@ -21,7 +21,7 @@ export default function ItemDetail(props) {
           {item[0]?.title}
         </h4>
         <div>
-          {item[0]?.completed === true ? 'complete' : 'not'}
+          {item[0]?.completed === true ? 'complete' : 'incomplete'}
         </div>
         <Link to={`/item/edit/${item[0]?.id}`}>
           Edit
