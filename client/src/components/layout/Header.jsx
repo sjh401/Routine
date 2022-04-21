@@ -16,11 +16,17 @@ const LogoutButton = styled(Button)(({ theme }) => ({
 export default function Header(props) {
   return (
     <header className='flex-row-evenly-center'>
-        <Link to='/home'>Home</Link>
-        <Link to='/calendar'>Calendar</Link>
-        <Link to='/item/add'>add</Link>
-        <Link to='/user'>user</Link>
-        {props.currentUser && <LogoutButton onClick={props.handleLogout}>Logout</LogoutButton>}
-    </header>
+      { !props.currentUser ?
+        <></>
+        :
+        <>
+            <Link to='/home'>Home</Link>
+            <Link to='/calendar'>Calendar</Link>
+            <Link to='/item/add'>add</Link>
+            <Link to='/user'>user</Link>
+            {props.currentUser && <LogoutButton onClick={props.handleLogout}>Logout</LogoutButton>}
+        </>
+        }
+  </header>
   )
 }

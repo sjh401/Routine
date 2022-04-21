@@ -63,11 +63,11 @@ export default function Container(props) {
 
     return(
         <>
-            {!currentUser && 
+            {!currentUser ? 
             <div>
-                <h2>
+                <div>
                     Hello there
-                </h2>
+                </div>
                 <img 
                     src='https://hips.hearstapps.com/digitalspyuk.cdnds.net/16/49/1481301038-hot-fuzz.jpg' 
                     alt='Nicholas Angel eating a cornetto'
@@ -75,8 +75,8 @@ export default function Container(props) {
                 />
                 <Link to='/login'>Login</Link>
                 <Link to='/register'>Register</Link>
-            </div>
-            }
+            </div> :
+            
             <Routes>
                 <Route 
                     path="/home" 
@@ -156,6 +156,7 @@ export default function Container(props) {
                     }
                 />
             </Routes>
+            }
         </>
 
     )
