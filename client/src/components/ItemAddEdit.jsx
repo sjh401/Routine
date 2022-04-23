@@ -21,14 +21,22 @@ export default function ItemAddEdit(props) {
     const ItemTextField = styled(TextField)(({  theme }) => ({
         margin: '10px 0px 0px 10px',
     }))
-    const { addEditFunction, date, setDate, checked, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id, edit } = props;
+    const { addEditFunction, date, setDate, checked, formData, setToggle, setTempItem, currentUser, toggleSet, item_id, edit } = props;
     const navigate = useNavigate()
     const [ checkbox, setCheckbox ] = useState(checked)
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [name]: value
+        }))
+      }
+    
     
     useEffect(() => {
         setCheckbox(checked)
     },[checked])
-    
+    // console.log(date)
     return (
         <div className="">
             <form 
@@ -46,7 +54,7 @@ export default function ItemAddEdit(props) {
                 })
                 navigate('/home')
                 }}>
-                <br/>
+                
                 <ItemTextField 
                     required 
                     label="Title"
@@ -54,7 +62,7 @@ export default function ItemAddEdit(props) {
                     variant="outlined" 
                     value={formData?.title}
                     onChange={handleChange}/>
-                <br/>
+                
                 <ItemTextField 
                     required 
                     label="Description"
@@ -62,7 +70,7 @@ export default function ItemAddEdit(props) {
                     variant="outlined" 
                     value={formData?.description}
                     onChange={handleChange}/>
-                <br/>
+                
                 <ItemTextField 
                     required 
                     label="Notes"
@@ -70,7 +78,7 @@ export default function ItemAddEdit(props) {
                     variant="outlined" 
                     value={formData?.notes}
                     onChange={handleChange}/>
-                <br/>
+                
                 {/* <input 
                     type={'date'} 
                     // placeholder={formData?.to_do_date.substring(0,10)}
@@ -88,25 +96,24 @@ export default function ItemAddEdit(props) {
                         }
                     }}
                 /> */}
-                <br/>
-                <LocalizationProvider 
-                dateAdapter={AdapterLuxon}>
-
+                
+                {/* <LocalizationProvider dateAdapter={AdapterLuxon}>
                     <DesktopDatePicker 
                         label="Date desktop"
                         inputFormat="MM/dd/yyyy"
                         name='to_do_date'
-                        value={formData.to_do_date}
-                        onChange={(e)=>{
-                            formData.to_do_date = DateTime.local(e).toLocaleString()
-                            if(edit === true) {
-                                setDate(DateTime.local(e).toLocaleString())
-                            }
-                        }}
+                        value={date}
+                        onChange={
+                            // (e)=>{
+                            // formData.to_do_date = new Date(Date.parse(e))
+                            // setDate(new Date(Date.parse(e)))
+                        // }
+                        console.log('hello')
+                    }
                         renderInput={(params) => <TextField {...params} />}
                     />
-                </LocalizationProvider>
-                <br/>
+                </LocalizationProvider> */}
+                
                 <FormControlLabel 
                     label='Complete?' 
                     name='completed'
@@ -124,7 +131,7 @@ export default function ItemAddEdit(props) {
                     onChange={handleChange}
                     value={formData?.completed}
                 />
-                <br/>
+                
                 <div>
                     <LoginButton type="submit" >
                         Submit

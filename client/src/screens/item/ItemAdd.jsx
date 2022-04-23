@@ -11,6 +11,7 @@ export default function ItemAdd(props) {
     completed: false,
     to_do_date: Date.now(),
 });
+const [ date, setDate ] = useState('')
 // const toggleSet = 'ADD'
 const handleChange = (e) => {
   const { name, value } = e.target;
@@ -28,13 +29,15 @@ const handleChange = (e) => {
         <ItemAddEdit 
           addEditFunction={postItem}
           formData={formData}
-          handleChange={handleChange}
+          // handleChange={handleChange}
           setToggle={setToggle}
           setTempItem={setTempItem}
           currentUser={currentUser}
           toggleSet={'POST'}
           checked={false}
           edit={false}
+          setDate={setDate}
+          date={date}
         />
       </div>
     </div>

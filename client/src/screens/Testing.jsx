@@ -15,7 +15,7 @@ export default function MaterialUIPickers() {
     setValue(newValue);
   };
 
-  console.log(DateTime.local(value).toLocaleString())
+  console.log(new Date(Date.parse(value)))
 
   return (
     <LocalizationProvider dateAdapter={AdapterLuxon}>
