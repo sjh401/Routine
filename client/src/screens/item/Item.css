@@ -1,0 +1,20 @@
+.add-edit-label {
+    margin: 15px 10px;
+    text-align:center;
+}
+.item-content {
+    display: grid;
+    grid-area: 1/1/2/1;
+    justify-content: center;
+    align-content: flex-start;
+}
+.item-grid {
+    display: grid;
+    grid: 1fr / 1fr 1fr 1fr;
+    height: 80vh;
+    min-height: 625px;
+    min-width: 1250px;
+}
+#checkbox {
+
+}

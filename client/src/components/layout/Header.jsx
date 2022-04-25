@@ -8,8 +8,7 @@ const LogoutButton = styled(Button)(({ theme }) => ({
     fontFamily: 'Poppins, sans-serif',
     width: 100,
     '&:hover': {
-        backgroundColor: '#f2e9e4',
-        color: '#4a4e69'
+        backgroundColor: '#9a8c98',
     },
 }));
 

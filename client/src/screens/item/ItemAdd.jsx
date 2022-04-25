@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ItemAddEdit from '../../components/ItemAddEdit';
+import './Item.css'
 
 export default function ItemAdd(props) {
   const { postItem, setToggle, setTempItem, currentUser } = props;
@@ -10,21 +11,21 @@ export default function ItemAdd(props) {
     title: '',
     completed: false,
     to_do_date: Date.now(),
-});
-// const toggleSet = 'ADD'
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setFormData(prevFormData => ({
-      ...prevFormData,
-      [name]: value
-  }))
-}
+  });
+  const [ date, setDate ] = useState('')
+  // const toggleSet = 'ADD'
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevFormData => ({
+        ...prevFormData,
+        [name]: value
+    }))
+  }
 
   return (
-    <div>
-      <Link to='/home'>Home</Link>
-      <div>
-        <h2 className="">create an item</h2>
+    <div className='item-grid'>
+      <div className='item-content'>
+        <div className="add-edit-label">create an item</div>
         <ItemAddEdit 
           addEditFunction={postItem}
           formData={formData}
@@ -35,6 +36,8 @@ const handleChange = (e) => {
           toggleSet={'POST'}
           checked={false}
           edit={false}
+          setDate={setDate}
+          date={date}
         />
       </div>
     </div>

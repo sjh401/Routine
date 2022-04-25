@@ -4,19 +4,19 @@ import { styled } from '@mui/material/styles'
 import { Link } from 'react-router-dom';
 import './Calendar.css'
 
-export default function Calendar(props) {
-  const DateInput = styled(Select)(() => ({
-    backgroundColor: 'rgba(242, 233, 228, 0)',
+const DateInput = styled(Select)(() => ({
+  backgroundColor: 'rgba(242, 233, 228, 0)',
+  borderBottomColor: '#4a4369',
+  '&:hover':{
     borderBottomColor: '#4a4369',
-    '&:hover':{
-      borderBottomColor: 'red',
-    },
-    '&:focused': {
-      background: '#22223b',
-      backgroundColor: 'rgba(242, 233, 228, 0)',
-      borderBottomColor: '#4a4369',
-    },
-  }))
+  },
+  '&:focus': {
+  },
+  '&:after': {
+    borderBottomColor: '#9a8c98',
+  }
+}))
+export default function Calendar(props) {
   const { allItems, currentUser } = props;
   const today = new Date();
   const [ monthItems, setMonthItems ] = useState([]);
@@ -24,7 +24,7 @@ export default function Calendar(props) {
   const [ year, setYear ]= useState(today.getFullYear());
   const [ dates, setDates ] = useState(new Array(new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).fill(0).map((element, index) => element = index+1))
   // const months = ['Janurary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  
+
   //presets for the calendar
   let column = new Date(`${month+1}/1/${year}`).getDay()
   let row = 1;
@@ -37,11 +37,6 @@ export default function Calendar(props) {
   let dayTaskCount = {};
   let obj = new Object();
 
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setMonth(prevMonth => prevMonth = value);
-  };
   const taskCount = (array) => {
     array.forEach(item => {
       let date = new Date(item.to_do_date).getDate() + 1
@@ -53,14 +48,16 @@ export default function Calendar(props) {
     })
   }
   useEffect(() => {
-    const monthlyItems = allItems.filter(item => new Date(item.to_do_date).getMonth() === month)
+    let monthlyItems = allItems.length ? allItems : [];
+    monthlyItems = monthlyItems?.filter(item => new Date(item.to_do_date).getMonth() === month && new Date(item.to_do_date).getFullYear() === year)
     dayTaskCount = {}
     obj = {}
     setMonthItems(monthlyItems)
     setDates(prevDates => prevDates = new Array(new Date(today.getFullYear(), month + 1, 0).getDate()).fill(0).map((element, index) => element = index+1))
-  },[month])
-
+  },[month, allItems, year])
+  
   taskCount(monthItems)
+
   return (
     <div>
       <div className='flex-row-evenly-center'>
@@ -70,20 +67,21 @@ export default function Calendar(props) {
               id="month-selector"
               style={{
                 color: '#4a4e69'
-              }}
-              >
+              }}>
                 Month
               </InputLabel>
             <DateInput
+              // id="date=input"
               labelId="month-selector"
               value={month}
-              onChange={handleChange}
               label="Month"
               style={{
                 '&:focused':{
                   borderBottomColor: '#4a4369'
                 }
               }}
+              onChange={
+                (e)=> setMonth(prevMonth => prevMonth = e.target.value)}
             >
               <MenuItem value={0}>Janurary</MenuItem> 
               <MenuItem value={1}>February</MenuItem> 
@@ -97,13 +95,22 @@ export default function Calendar(props) {
               <MenuItem value={9}>October</MenuItem>
               <MenuItem value={10}>November</MenuItem>
               <MenuItem value={11}>December</MenuItem>
+              <MenuItem ></MenuItem>
             </DateInput>
           </FormControl>
         </div>
         <div>
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="year-selector">Year</InputLabel>
-            <Select
+            <InputLabel 
+              id="year-selector"
+              style={{
+                color: '#4a4e69'
+              }}
+            >
+              Year
+            </InputLabel>
+            <DateInput
+              id='date=input'
               labelId="year-selector"
               value={year}
               onChange={(e)=> setYear(prevYear => prevYear = e.target.value)}
@@ -119,7 +126,7 @@ export default function Calendar(props) {
                   </MenuItem>
                 )
               })}
-            </Select>
+            </DateInput>
           </FormControl>
         </div>
       </div>

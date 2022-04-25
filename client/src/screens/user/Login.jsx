@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Button, TextField, styled } from '@mui/material';
 
-
 const LoginButton = styled(Button)(({ theme }) => ({
-    color: '#fff',
-    backgroundColor: '#ff7777',
+    color: '#f2e9e4',
+    backgroundColor: '#4a4e69',
     fontFamily: 'Poppins, sans-serif',
-    width: '60vw',
-    maxWidth: 194,
-    marginTop: 10,
+    width: 194,
+    padding: '16.5px 14px',
+    margin: '10px 0px 0px 10px',
     '&:hover': {
-        backgroundColor: '#4fa8fc',
+        backgroundColor: '#9a8c98',
     },
 }));
 
