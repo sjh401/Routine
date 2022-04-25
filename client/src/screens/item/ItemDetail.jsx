@@ -7,19 +7,18 @@ export default function ItemDetail(props) {
   const [ item, setItem ] = useState([]);
 
   useEffect(() => {
-    setItem(allItems.filter(element=> element.id === Number(id.id)))
+    setItem(allItems.length ? allItems.filter(element=> element.id === Number(id.id)) : [])
   },[allItems])
-
 
   return(
     <React.Fragment>
       <div>
-        <Link to='/home'>Home</Link>    
+
       </div>
       <div>
-        <h4>
+        <div>
           {item[0]?.title}
-        </h4>
+        </div>
         <div>
           {item[0]?.completed === true ? 'complete' : 'incomplete'}
         </div>

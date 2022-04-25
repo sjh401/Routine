@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Checkbox, FormControlLabel, Button, TextField, styled } from '@mui/material';
 
-const LoginButton = styled(Button)(({ theme }) => ({
-    color: '#fff',
-    backgroundColor: '#ff7777',
+
+const ItemButton = styled(Button)(({ theme }) => ({
+    color: '#f2e9e4',
+    backgroundColor: '#4a4e69',
     fontFamily: 'Poppins, sans-serif',
-    width: '60vw',
-    maxWidth: 194,
-    marginTop: 20,
+    width: 194,
+    padding: '16.5px 14px',
+    margin: '10px 0px 0px 10px',
     '&:hover': {
-        backgroundColor: '#4fa8fc',
+        backgroundColor: '#9a8c98',
     },
 }));
 
 const ItemTextField = styled(TextField)(({  theme }) => ({
     margin: '10px 0px 0px 10px',
 }))
-
 export default function ItemAddEdit(props) {
     const { addEditFunction, date, setDate, checked, formData, handleChange, setToggle, setTempItem, currentUser, toggleSet, item_id, edit } = props;
     const navigate = useNavigate()
@@ -26,7 +26,7 @@ export default function ItemAddEdit(props) {
     useEffect(() => {
         setCheckbox(checked)
     },[checked])
-    
+
     return (
         <div className="">
             <form 
@@ -70,11 +70,15 @@ export default function ItemAddEdit(props) {
                     onChange={handleChange}/>
                 <br/>
                 <input 
-                    type={'date'} 
-                    // placeholder={formData?.to_do_date.substring(0,10)}
+                    type={'date'}
                     style={{  
-                        width: '60vw',
-                        maxWidth: 194,
+                        backgroundColor: '#f2e9e4',
+                        borderWidth: '1px',
+                        borderColor: 'rgba(0,0,0,0.25)',
+                        borderRadius: '4px',
+                        height: '23px',
+                        padding: '16.5px 14px',
+                        width: '164px',
                         margin: '10px 0px 0px 10px',
                     }}
                     name='to_do_date'
@@ -88,10 +92,15 @@ export default function ItemAddEdit(props) {
                 />
                 <br/>
                 <FormControlLabel 
+                    id='checkbox'
                     label='Complete?' 
                     name='completed'
                     // {formData?.completed === true? defaultChecked : ''}
                     checked={checkbox}
+                    style={{
+                        width: '164px',
+                        margin: '0px 0px 0px 10px',
+                    }}
                     control={
                         <Checkbox 
                         onChange={
@@ -106,9 +115,12 @@ export default function ItemAddEdit(props) {
                 />
                 <br/>
                 <div>
-                    <LoginButton type="submit" >
+                    <ItemButton 
+                        id='item-button'
+                        type="submit" 
+                    >
                         Submit
-                    </LoginButton>
+                    </ItemButton>
                 </div>
             </form>
         </div>
