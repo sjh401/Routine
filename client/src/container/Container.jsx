@@ -138,6 +138,12 @@ export default function Container(props) {
                     element={
                         <ItemDetail
                             allItems={allItems}
+                            putItem={putItem}
+                            deleteItem={deleteItem}
+                            currentUser={currentUser}
+                            setToggle={setToggle}
+                            setTempItem={setTempItem}
+                            tempItem={tempItem}
                         />
                     }
                 />
