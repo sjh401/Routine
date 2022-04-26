@@ -57,9 +57,9 @@ export default function Container(props) {
                 }
             }))
             setToggle(prevToggle => prevToggle ='')
-            console.log(allItems)
         }
     },[toggle])
+    console.log(allItems)
 
     return(
         <>

@@ -55,7 +55,6 @@ export default function Calendar(props) {
     setMonthItems(monthlyItems)
     setDates(prevDates => prevDates = new Array(new Date(today.getFullYear(), month + 1, 0).getDate()).fill(0).map((element, index) => element = index+1))
   },[month, allItems, year])
-  
   taskCount(monthItems)
 
   return (
@@ -133,11 +132,11 @@ export default function Calendar(props) {
       <div className='flex-row-evenly-center'>
         <div className='calendar-grid'>
           {dates.map((date, index) => {
-            if(column>7){
-              column = 1
+            let x = new Date(year, month, date).getDay()
+            if(x === 0 && date !== 1){
               row+=1
             }
-            obj[date] = `${row}/${column}/${row + 1}/${column+1}`
+            obj[date] = `${row}/${x+1}/${row + 1}/${x+2}`
             return (
               <div 
               key={`${date} ${index}`}
@@ -145,7 +144,7 @@ export default function Calendar(props) {
                   display:'grid',
                   height: 90,
                   width: 170,
-                  gridArea: `${row}/${column}/${row + 1}/${column+=1}`,
+                  gridArea: `${row}/${x+1}/${row + 1}/${x+2}`,
                   alignContent: 'space-between',
                   zIndex: 1,
                 }}>
@@ -187,6 +186,7 @@ export default function Calendar(props) {
           }
         </div>
       </div>
+      {console.log(obj)}
     </div>
   )
 }
